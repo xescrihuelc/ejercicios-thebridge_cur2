@@ -2,8 +2,9 @@
 
 ## JS Scope
 
--   El Scope determina la accesibilidad de las variables que pongamos en el script.
--   Hay de tres tipos: `Bloque/Local`, `Función` y `Global`.
+El Scope determina la accesibilidad de las variables que pongamos en el script.
+
+Hay de tres tipos: `Bloque/Local`, `Función` y `Global`.
 
 ### Scope | `Bloque/Local`
 
@@ -23,7 +24,7 @@ Las variables tipo `var` PUEDEN UTILIZARSE incluso como variables `GLOBALES` y p
 
 ### Scope | `Función`
 
--   El Scope en bloque las varibles declaradas dentro de funciones, no pueden utilizarse fuera de las mísmas.
+El Scope en bloque las variables declaradas dentro de funciones, no pueden utilizarse fuera de las mísmas.
 
 ```js
 function myFunction() {
@@ -37,7 +38,7 @@ console.log(coche);
 
 ### Scope | `Global`
 
--   El Scope en Global son accesibles en cualquier parte del script
+El Scope en Global son accesibles en cualquier parte del script
 
 ```js
 var x = 1; // Global scope
@@ -57,7 +58,6 @@ console.log(x, y, z);
 
 -   Se utiliza para asegurarnos que los datos y su tipo de datos sean únicamente de la forma en la que deseamos.
 -   Es comúnmente usado para formularios HTML.
--
 
 ```js
 function validateForm() {
@@ -67,8 +67,4 @@ function validateForm() {
         return false;
     }
 }
-```
-
-```js
-"Nicola".toLowerCase().includes("n");
 ```
