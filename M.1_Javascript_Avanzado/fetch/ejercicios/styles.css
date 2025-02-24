@@ -59,3 +59,11 @@ footer {
 }
 
 /* aquí tus css */
+#obtenerChiste {
+  font-weight: bold;
+}
+
+#chiste {
+  font-weight: bold;
+  color: fuchsia;
+}
