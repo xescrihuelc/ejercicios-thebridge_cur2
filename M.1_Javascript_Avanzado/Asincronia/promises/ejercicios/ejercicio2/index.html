@@ -1,0 +1,66 @@
+<!-- *** Lo primero que debes hacer es FORKEAR este documento *** -->
+<!-- *** si tenéis dos veces abierto el mismo proyecto no se refrescará y dará problemas *** -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>JS MOLA</title>
+        <link href="./styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="warning red">
+                    <span
+                        >Si tienes dos veces abierto el mismo proyecto no se
+                        refrescará y dará problemas. Trabaja siempre desde un
+                        solo espacio 💻</span
+                    >
+                </div>
+                <div class="warning yellow">
+                    <span
+                        >Lo primero que debes hacer es
+                        <strong><i>FORK</i></strong> de este documento.</span
+                    >
+                    <span
+                        >💾 Recuerda guardar tus cambios para no
+                        perderlos.</span
+                    >
+                </div>
+            </header>
+
+            <h2>Ejercicio Fetch</h2>
+            <ul>
+                <li>
+                    Puedes revisar la documentación de la API:
+                    <strong>https://sv443.net/jokeapi/v2/</strong>
+                </li>
+                <li>
+                    Accede al siguiente endpoint:
+                    <strong
+                        >https://v2.jokeapi.dev/joke/Programming?lang=es</strong
+                    >
+                </li>
+                <li>
+                    Cada vez que se pulse el botón
+                    <strong>"Obtener chiste"</strong> deberá a aparecer en el
+                    espacio de <strong>"chiste"</strong>, el chiste que nos trae
+                    la API
+                </li>
+                <li>Dale estilos como mejor te parezca</li>
+                <li>
+                    Haz que tenga un timeout y que mientras esté buscando
+                    haparezca un texto diciendo que esta cargando
+                </li>
+            </ul>
+            <h2>¡Chistes Divertidos!</h2>
+            <p>Haz clic en el botón para obtener un chiste:</p>
+
+            <button id="obtenerChiste">Obtener Chiste</button>
+            <p id="chiste"></p>
+        </main>
+        <script src="./script.js"></script>
+    </body>
+</html>
