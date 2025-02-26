@@ -50,12 +50,12 @@ main  {
 .character {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     width: 300px;
-    /* height: 200px; */
+    height: 775px;
     margin: 10px;
-    background-color: white;
+    background-color: lightcoral;
     color: black;
     border-radius: 10px;
     padding-left: 20px;
@@ -63,7 +63,8 @@ main  {
 }
 
 .name {
-    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 28px;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -72,6 +73,10 @@ main  {
 img {
     width: 100px;
     height: 200px;
+}
+
+.description {
+    color: #537818;
 }
 
 #loading {

@@ -32,3 +32,45 @@ Promise.all([p1, p2, p3]).then((values) => {
     console.log(values); // [3, 1337, "foo"]
 });
 ```
+
+## Async/Await
+
+Se utilizan para gestionar las promesas de forma más sencilla
+
+-   Async: Se utiliza para
+
+```js
+async function myFunc() {
+    return "Hello";
+}
+
+const myFunc = async () => (
+    return "Hello";
+)
+```
+
+-   Await: Es para hacer espera hasta que se resuelva una promesa
+
+```js
+async function myFunc() {
+    const resultado = await miPromesa;
+    console.log(resultado);
+}
+
+myFunc();
+```
+
+Podemos usar para `try/catch` para poder controlar errores o promesas rechazadas.
+
+```js
+async function myFunc() {
+    try {
+        const resultado = await miPromesa;
+        console.log(resultado);
+    } catch (error) {
+        console.error(error);
+    }
+}
+```
+
+#
