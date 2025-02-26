@@ -24,11 +24,3 @@ fetch("https://example.com/api/data")
 ```
 
 En este ejemplo podemos ver que realiza una peticion GET a la URL proporcionada, convierte la respuesta a formato `JSON`, y luego permite manipular los datos recuperados en la segunda función `then`. Además, se incluye un bloque `catch` para gestionar posibles errores en la solicitud.
-
-## sdjhf
-
-## sdfjsfs
-
-### sdjifhd
-
-## sud
