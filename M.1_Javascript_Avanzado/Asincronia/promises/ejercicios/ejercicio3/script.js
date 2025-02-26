@@ -17,27 +17,35 @@ const numCharacters = () => {
 };
 
 const getCharacters = (p) => {
-    const array = [];
+    const array = new Map([
+        ["name", i.name],
+        ["image", i.image],
+        ["name", i.description],
+    ]);
+
     p.forEach((i) => {
         array.push([i.name, i.image, i.description]);
     });
     return array;
 };
 
-const addElements = (p) => {
+const insertCharacters = (p) => {
     for (let i = 0; i < p.length; i++) {
         const list = document.getElementById("characters");
         const character = document.createElement("div");
         character.classList.add("character");
+        console.log(p.name);
+        // console.log(p[i].name);
         character.innerHTML = `
-        <p class="name"></p>
-        <p class="image"></p>
-        <p class="description"></p>
+        <p class="name"><b>${p[i][0]}</b></p>
+        <p class="image"><img src="${p[i][1]}" alt="Figura completa de ${p[i][0]}"></p>
+        <p class="description"><b>${p[i][2]}</b></p>
         `;
         list.appendChild(character);
     }
 };
 
+/* 
 const insertCharacters = (p) => {
     for (let i = 0; i < p.length; i++) {
         const name = document.getElementsByClassName("name")[i];
@@ -48,6 +56,7 @@ const insertCharacters = (p) => {
         description.innerHTML = `<b>${p[i][2]}</b>`;
     }
 };
+ */
 
 fetch(`https://dragonball-api.com/api/characters${numCharacters()}`)
     .then((response) => response.json())
@@ -58,7 +67,7 @@ fetch(`https://dragonball-api.com/api/characters${numCharacters()}`)
         setTimeout(() => {
             document.getElementById("characters").innerHTML = "";
             const characters = getCharacters(data.items);
-            addElements(characters);
+            // addElements(characters);
             insertCharacters(characters);
         }, 5000);
     })
