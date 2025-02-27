@@ -1,4 +1,6 @@
 // Busqueda
+let nextPageLink = "";
+
 function lowing(txt) {
     return String(txt).toLowerCase();
 }
@@ -57,6 +59,7 @@ fetch(`https://dragonball-api.com/api/characters`)
         document.getElementById(
             "characters"
         ).innerHTML = `<p id="loading">Preparando página...</p>`;
+        nextPageLink = data.links.next;
         setTimeout(() => {
             document.getElementById("characters").innerHTML = "";
             const characters = getCharacters(data.items);
@@ -68,6 +71,28 @@ fetch(`https://dragonball-api.com/api/characters`)
         console.error(`ERROR, ${error}`);
     });
 
+const nxtPage = () => {
+    fetch(`${nextPageLink}`)
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById(
+                "characters"
+            ).innerHTML = `<p id="loading">Preparando página...</p>`;
+            nextPageLink = data.links.next;
+            setTimeout(() => {
+                document.getElementById("characters").innerHTML = "";
+                const characters = getCharacters(data.items);
+                insertCharacters(characters);
+                subSection.style.display = "";
+            }, 5000);
+        })
+        .catch((error) => {
+            console.error(`ERROR, ${error}`);
+        });
+};
+
 //Triggers
 const button = document.getElementById("bttnSearch");
 button.addEventListener("click", busqueda);
+const nxtBttn = document.getElementById("nextPage");
+nxtBttn.addEventListener("click", nxtPage);

@@ -87,13 +87,19 @@ img {
     font-weight: bold;
 }
 
-#searchBar{
+#searchBar {
     margin-top: 50px;
     width: 200px;
     height: 30px;
     border-radius: 10px;
 }
 
-#bttnSearch{
+#bttnSearch {
     height: 30px;
+}
+
+#nextPage {
+
+    background-color: green;
+    color:white;
 }
