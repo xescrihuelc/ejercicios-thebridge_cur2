@@ -50,6 +50,9 @@ const insertCharacters = (p) => {
     });
 };
 
+const subSection = document.getElementById("searchSection");
+subSection.style.display = "none";
+
 fetch(`https://dragonball-api.com/api/characters`)
     .then((response) => response.json())
     .then((data) => {
@@ -60,6 +63,7 @@ fetch(`https://dragonball-api.com/api/characters`)
             document.getElementById("characters").innerHTML = "";
             const characters = getCharacters(data.items);
             insertCharacters(characters);
+            subSection.style.display = "";
         }, 5000);
     })
     .catch((error) => {
