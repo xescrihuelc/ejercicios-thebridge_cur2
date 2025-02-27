@@ -18,7 +18,6 @@ function busqueda() {
                 "characters"
             ).innerHTML = `<p id="loading">Preparando página...</p>`;
             setTimeout(() => {
-                console.log(data);
                 document.getElementById("characters").innerHTML = "";
                 const characters = getCharacters(data);
                 console.log(characters);
@@ -32,7 +31,6 @@ const getCharacters = (p) => {
     p.forEach((i) => {
         array.set(i.id, { name: i.name, image: i.image, desc: i.description });
     });
-    console.log(p);
     return array;
 };
 
