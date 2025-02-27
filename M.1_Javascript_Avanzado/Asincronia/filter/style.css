@@ -1,0 +1,99 @@
+html, body  {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer  {
+    text-align: center;
+    background-color: whitesmoke;
+    color: black;
+}
+
+
+header  {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+footer  {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+main  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    background-color: black;
+    color: white;
+}
+
+#characters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.character {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 300px;
+    height: 775px;
+    margin: 10px;
+    background-color: lightcoral;
+    color: black;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.name {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+img {
+    width: 100px;
+    height: 200px;
+}
+
+.description {
+    color: #537818;
+}
+
+#loading {
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#searchBar{
+    margin-top: 50px;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+#bttnSearch{
+    height: 30px;
+}
