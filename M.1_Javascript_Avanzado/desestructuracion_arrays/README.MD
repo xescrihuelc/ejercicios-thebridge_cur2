@@ -1,23 +1,53 @@
-Desesructurando el Array | Operadores Rest y Array
+# Desesructurando el Array | Operadores Rest y Array
 
--   ¿Qué es desestructurar?
--   La sintaxis de desestructuración es una expresión de JavaScript que permite desempacar valores de arreglos o propiedades de objetos en distintas variables.
+## ¿Qué es desestructurar?
+
+La sintaxis de **desestructuración** es una expresión de JavaScript que permite desempacar valores de arrays o propiedades de objetos en distintas variables sin necesidad de acceder a las propiedades de forma explícita.
 
 Para desestructurar objetos hemos de:
 
--   Utilizar llavas "{}" delante de la variable para realizar la desestructuración
+-   Utilizar llavas "`{}`" delante de la variable para realizar la desestructuración
 -   Da igual el orden, mientras se llame a una propiedad existente en el objeto.
 
+**Ejemplo básico de desestructuración:**
+
 ```js
-const Usuario = {
-    nombre: "Javier",
-    email: "javi@gmail.com",
-    registrado: true,
-    seguidores: ["Ger", "Gabriel", "Jorge", "Rebeca", "Xavi"],
-};
+const persona = { nombre: "Juan", edad: 30, ciudad: "Madrid" };
+
+// Desestructuración de objeto
+const { nombre, edad, ciudad } = persona;
+
+console.log(nombre); // Juan
+console.log(edad); // 30
+console.log(ciudad); // Madrid
 ```
 
--   Podemos renombrar cualquier propiedad utilizando ":"
+En este caso, estamos extrayendo las propiedades `nombre`, `edad` y `ciudad` del objeto `persona` y asignándolas a las variables con los mismos nombres.
+
+**Si ponemos elementos que no existen en el array serán `undefined`**
+
+### Saltos de posiciones
+
+No hace falta darles nombre a todas las posiciones, podemos saltarnoslas con “ , ” y darle nombre a la posición que nos interese:
+
+```js
+const personas = ["Juan", "Laura", "Patricia", "María", "Paula"];
+
+const [, , nombre_persona] = personas;
+```
+
+## Desestructuración en Objetos
+
+-   Utilizamos las **llaves `{}`** delante de la variable para realizar la desestructuración.
+-   No importa el orden, mientras llames a una propiedad que exista en el objeto.
+
+```js
+const { nombre, seguidores, registrado } = Usuario;
+
+console.log(seguidores);
+```
+
+-   Podemos renombrar cualquier propiedad utilizando los “`:`” :
 
 ```js
 const { nombre, seguidores, registrado, email: correo } = Usuario;
@@ -25,83 +55,88 @@ const { nombre, seguidores, registrado, email: correo } = Usuario;
 console.log(correo);
 ```
 
--   Tambien podemos asignar los valores por defecto de las variables en caso de que las propiedades o elementos correspondientes no esten definidos "="
+-   La desestructuración también permite asignar valores por defecto a las variables en caso de que las propiedades o elementos correspondientes no estén definidos:
 
 ```js
 const { nombre, seguidores, registrado, email: correo, edad = 38 } = Usuario;
 
-console.log(edad);
+console.log(correo);
 ```
 
-Operador Rest
+## Operador Spread (`...`)
+
+El operador de propagación spread operator permite descomponer una expresión iterable (como un array o un objeto iterable) en elementos individuales. Se denota con tres puntos consecutivos: **`...`**
+
+Sus usos son:
+
+-   Para pasar un array a funciones que normalmente requieren una lista de muchos argumentos.
 
 ```js
-const { nombre, seguidores, registrado, email: correo, edad = 38 } = Usuario;
+function sum(a, b, c) {
+    return a + b + c;
+}
 
-console.log(edad);
-```
-
-Operador Spread
-
--   Este operador permite descomponer directamente expresiones iterables (como arrays u objetos iterables)
--   Se usa normalmente para descomponer y concatenar arrays, y mergear objetos
--   dskfdsfij
-
-```js
 const numbers = [1, 2, 3];
-console.log("Array", numbers);
-/*Array [ 1, 2, 3 ]*/
+const result = sum(...numbers);
 
-console.log("Array descompuesto", ...numbers);
-/*Array descompuesto 1 2 3*/
+console.log(result);
 ```
+
+-   Concatenar Arrays
 
 ```js
-const array1 = ['patata', 'tomate', 'lechuga']
-const array2 = [1, true, 'chocolate']
+const array1 = ["patata", "tomate", "lechuga"];
+const array2 = [1, true, "chocolate"];
 
-const objeto1 = {
-    a = 10,
-    b = 'caracola'
-}
-const objeto2 = {
-    c = 20,
-    d = 'caracola'
-}
-
-const concatenarObjeto = [...array1, ...array2]
-const mergearObjeto = {...objeto1, ...objeto2}
-
-console.log(concatenarObjeto);
-/**/
-console.log(mergearObjeto);
-/**/
+// Fusionamos las dos arrays en 1
+const concatenarArray = [...array1, ...array2];
+console.log(concatenarArray);
 ```
 
-Operador REST
+-   Mergear Objetos
 
--   Este operador es exactamente igual a la sintexis del operador de Spread en JS puediendo se usado para desestructurar arrays y objetos. Hasta cierto punto, Rest es lo contrario de spread. Spread 'expande' un array en sus elementos, y Rest recoge múltiples elementos y los 'condensa' en uno solo.
--   Es para definifir que algo recibirá el resto
--   Crar funciones que reciban x númo de argumentos
+```js
+const objeto1 = {
+    a: 10,
+    b: "caracola",
+};
+const objeto2 = {
+    c: 2,
+    d: "cocacola",
+};
+
+// Fusionamos los dos objetos en 1
+const mergearObjeto = { ...objeto1, ...objeto2 };
+console.log(mergearObjeto);
+```
+
+## Operador Rest (`...rest`)
+
+El operador Rest es exactamente igual a la sintaxis del operador de Spread, y se utiliza para desestructurar arrays y objetos. En cierto modo, Rest es lo contrario de spread. Spread 'expande' un array en sus elementos, y Rest recoge múltiples elementos y los 'condensa' en uno solo.
+
+Tiene viarios usos:
+
+-   Coger el resto de elementos y condensarlo en uno solo, el operador rest siempre se tiene que colocar al final
 
 ```js
 const Usuario2 = {
-    nombre: 'Laura',
-    email: 'laura@gamil.com',
+    nombre: "Laura",
+    email: "laura@gmail.com",
     edad: 31,
-    registrado: true,
-    seguidores: ['Ger', 'Alex', 'Claudio']
-}
+    registrado: false,
+    seguidores: ["Ger", "Gabriel", "Angela"],
+};
 
-cosnt {edad, registrado, ...rest} = Usuario2
-console.log(losdemas)
+const { edad, registrado, ...rest } = Usuario2;
+console.log(rest);
 ```
+
+-   Crear funciones que acepten cualquier número de argumentos
 
 ```js
 function listarArticulos(...articulos) {
     console.log(articulos);
 }
-
 listarArticulos("Hola", 2, true, { a: 3, c: 17 }, [1, 2, 3, 4]);
 listarArticulos("Tarjeta de credito", "Paragüas", "Mochila");
 listarArticulos(2);
