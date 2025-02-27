@@ -17,32 +17,44 @@ const numCharacters = () => {
 };
 
 const getCharacters = (p) => {
-    const array = new Map([
-        ["name", i.name],
-        ["image", i.image],
-        ["name", i.description],
-    ]);
-
+    const array = new Map();
     p.forEach((i) => {
-        array.push([i.name, i.image, i.description]);
+        array.set(i.id, { name: i.name, image: i.image, desc: i.description });
     });
     return array;
 };
 
 const insertCharacters = (p) => {
-    for (let i = 0; i < p.length; i++) {
+    p.forEach((i) => {
+        console.log(i.name, i.image, i.desc);
         const list = document.getElementById("characters");
         const character = document.createElement("div");
         character.classList.add("character");
-        console.log(p.name);
-        // console.log(p[i].name);
         character.innerHTML = `
-        <p class="name"><b>${p[i][0]}</b></p>
-        <p class="image"><img src="${p[i][1]}" alt="Figura completa de ${p[i][0]}"></p>
-        <p class="description"><b>${p[i][2]}</b></p>
+        <p class="name"><b>${i.name}</b></p>
+        <p class="image"><img src="${i.image}" alt="Figura completa de ${i.name}"></p>
+        <p class="description"><b>${i.desc}</b></p>
         `;
         list.appendChild(character);
+    });
+
+    /* 
+    for (let i = 0; i < p.length; i++) {
+        // console.log(i);
+        // console.log(p[i]);
+        const list = document.getElementById("characters");
+        const character = document.createElement("div");
+        character.classList.add("character");
+        console.log(p[i].name);
+        character.innerHTML = `
+        <p class="name"><b>${p[i].name}</b></p>
+        <p class="image"><img src="${p[i].image}" alt="Figura completa de ${p[i].name}"></p>
+        <p class="description"><b>${p[i].desc}</b></p>
+        `;
+        // console.log(character);
+        list.appendChild(character);
     }
+     */
 };
 
 /* 
@@ -67,6 +79,7 @@ fetch(`https://dragonball-api.com/api/characters${numCharacters()}`)
         setTimeout(() => {
             document.getElementById("characters").innerHTML = "";
             const characters = getCharacters(data.items);
+            console.log(characters);
             // addElements(characters);
             insertCharacters(characters);
         }, 5000);
