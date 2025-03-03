@@ -98,8 +98,11 @@ img {
     height: 30px;
 }
 
-#nextPage {
-
+.bttnPages {
     background-color: green;
     color:white;
+}
+
+.bttnPages:disabled{
+    background-color: grey;
 }
