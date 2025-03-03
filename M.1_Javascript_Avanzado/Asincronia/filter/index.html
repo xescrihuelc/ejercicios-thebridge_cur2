@@ -9,16 +9,51 @@
     <body>
         <header><b>DRAGON BALL API</b> EJERCICIO</header>
         <main>
-            <span id="searchSection">
+            <span id="filterBox">
                 <input
                     type="search"
                     name="searchBar"
                     id="searchBar"
                     placeholder="Buscar personaje por nombre"
                 />
-                <input type="button" id="bttnSearch" value="Búsqueda" hidden />
+                <br />
+                <span id="genderFilter">
+                    <label for="gender">Indica el genero:</label>
+                    <select name="gender" id="characterGender">
+                        <option value="" selected>Ninguno</option>
+                        <option value="male">Hombre</option>
+                        <option value="female">Mujer</option>
+                        <option value="unkkown">Desconocido</option>
+                    </select>
+                </span>
+                <span id="raceFilter">
+                    <label for="race">Indica la Raza:</label>
+                    <select name="race" id="characterRace">
+                        <option value="" selected>Ninguno</option>
+                        <option value="Human">Humano</option>
+                        <option value="Saiyan">Saiyan</option>
+                        <option value="Namekian">Namekian</option>
+                        <option value="Majin">Majin</option>
+                        <option value="Frieza Race">Raza Freezer</option>
+                        <option value="Android">Androide</option>
+                        <option value="Jiren Race">Raza Jiren</option>
+                        <option value="God">Dios</option>
+                        <option value="Angel">Angel</option>
+                        <option value="Evil">Malvado</option>
+                        <option value="Nucleico">Nucleico</option>
+                        <option value="Nucleico benigno">
+                            Nucleico benigno
+                        </option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </span>
+                <input
+                    type="button"
+                    id="restoreFilers"
+                    value="Borrar Filtros"
+                />
             </span>
-            <span id="characters"> </span>
+            <span id="characters"></span>
         </main>
         <footer>
             <input
