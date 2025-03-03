@@ -61,6 +61,7 @@ function getResponseAPI(p) {
     } else {
         console.error("Parametro no válido pasado");
         alert("Parametro no válido pasado");
+        return;
     }
 
     fetch(url)
