@@ -29,7 +29,6 @@ const insertCharacters = (p) => {
 };
 
 function busqueda() {
-    searchBar = document.getElementById("searchBar");
     document.getElementById("characters").innerHTML = "";
 
     fetch(
@@ -100,9 +99,9 @@ subSection.style.display = "none";
 getResponseAPI("");
 
 //Triggers
-const button = document.getElementById("bttnSearch");
+const searchBar = document.getElementById("searchBar");
 const prevBttn = document.getElementById("prevPage");
 const nxtBttn = document.getElementById("nextPage");
-button.addEventListener("click", busqueda);
+searchBar.addEventListener("change", busqueda);
 prevBttn.addEventListener("click", () => getResponseAPI("prev"));
 nxtBttn.addEventListener("click", () => getResponseAPI("next"));
