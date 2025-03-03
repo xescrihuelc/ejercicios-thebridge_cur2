@@ -56,6 +56,10 @@ main  {
     gap: 10px;
 }
 
+#restoreFilters {
+    margin-top: 20px;
+}
+
 #characters {
     display: flex;
     flex-wrap: wrap;
