@@ -5,6 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>DB APIs</title>
         <link rel="stylesheet" href="./style.css" />
+        <link
+            rel="shortcut icon"
+            href="https://web.dragonball-api.com/icons/favicon-16x16.png"
+            type="image/x-icon"
+        />
     </head>
     <body>
         <header><b>DRAGON BALL API</b> EJERCICIO</header>
@@ -47,11 +52,18 @@
                         <option value="Unknown">Unknown</option>
                     </select>
                 </span>
-                <input
-                    type="button"
-                    id="restoreFilters"
-                    value="Borrar Filtros"
-                />
+                <span id="filterButtons">
+                    <input
+                        type="button"
+                        id="restoreFilters"
+                        value="Borrar Filtros"
+                    />
+                    <input
+                        type="button"
+                        id="applyFilters"
+                        value="Aplicar Filtros"
+                    />
+                </span>
             </span>
             <span id="characters"></span>
         </main>

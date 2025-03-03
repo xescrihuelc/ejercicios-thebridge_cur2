@@ -28,6 +28,21 @@ const insertCharacters = (p) => {
     });
 };
 
+// const filters = () => {
+// 
+// }
+
+const rsetFilters = () => {
+    const searchBar = document.getElementById("searchBar");
+    const chrGender = document.getElementById("characterGender");
+    const chrRace = document.getElementById("characterRace");
+    searchBar.value = ""
+    chrGender.value = ""
+    chrRace.value = ""
+    getResponseAPI();
+}
+
+/* 
 function busqueda() {
     document.getElementById("characters").innerHTML = "";
 
@@ -48,30 +63,39 @@ function busqueda() {
             }, 5000);
         });
 }
+ */
 
 function getResponseAPI(p) {
     let url = "";
-    if (p !== "" && p !== "prev" && p !== "next") {
-        console.error("Parametro no válido pasado");
-        alert("Parametro no válido pasado");
-        return;
-    };
+    
+    switch (url) {
+        case "":
+            url = "https://dragonball-api.com/api/characters?page=1&limit=10";
+            break;
 
-    if (url === "") {
-        url = "https://dragonball-api.com/api/characters?page=1&limit=10";
-    };
-    if (p == "prev") {
-        url = prevPageLink;
-    };
-    if (p == "next") {
-        url = nextPageLink;
-    };
+        case "prev":
+            url = prevPageLink;
+            break;
+
+        case "next":
+            url = nextPageLink;
+            break;
+
+        // case "filter":
+            // 
+        //     break;
+    
+        default:
+            console.error("Parametro no válido pasado");
+            alert("Parametro no válido pasado");
+            return;
+    }
 
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
             // Ocultar controles
-            searchBar.hidden = true;
+            filterBox.style.display = 'none'
             prevBttn.hidden = true;
             nxtBttn.hidden = true;
 
@@ -106,9 +130,9 @@ function getResponseAPI(p) {
                 }
 
                 // Mostrar botones de control
+                filterBox.style.display = ''
                 prevBttn.hidden = false;
                 nxtBttn.hidden = false;
-                searchBar.hidden = false;
             }, 5000);
         })
         .catch((error) => {
@@ -116,16 +140,21 @@ function getResponseAPI(p) {
         });
 }
 
-const filterBox = document.getElementById("filterBox");
-filterBox.style.display = "none";
-getResponseAPI("");
 
-//Triggers
-const searchBar = document.getElementById("searchBar");
+
+const filterBox = document.getElementById("filterBox");
+filterBox.style.display = 'none';
+getResponseAPI();
+
+
+// Variable HTML elements
 const prevBttn = document.getElementById("prevPage");
 const nxtBttn = document.getElementById("nextPage");
+const restoreFilters = document.getElementById("restoreFilters");
+// const applyFilters = document.getElementById("applyFilters");
 
-// EventListeners
-searchBar.addEventListener("change", () => getResponseAPI());
+// Triggers
 prevBttn.addEventListener("click", () => getResponseAPI("prev"));
 nxtBttn.addEventListener("click", () => getResponseAPI("next"));
+restoreFilters.addEventListener("click", rsetFilters);
+// applyFilters.addEventListener("click", () => getResponseAPI("filter"));
