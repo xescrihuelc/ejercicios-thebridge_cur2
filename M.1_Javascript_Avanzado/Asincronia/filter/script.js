@@ -56,7 +56,7 @@ const aplyFilters = () => {
     }
     
     // IF RACE
-    if (chrRace !== "") {
+    if (chrRace.value !== "") {
         if (searchBar.value !== "" || chrGender.value !== "") {
             phraseFilter = phraseFilter + '&race=' + lowing(chrRace.value)
         } else {
@@ -65,7 +65,7 @@ const aplyFilters = () => {
     }
     
     // IF AFFILIATION
-    if (chrAffiliation !== "") {
+    if (chrAffiliation.value !== "") {
         if (searchBar.value !== "" || chrGender.value !== "" || chrRace.value !== "") {
             phraseFilter = phraseFilter + '&affiliation=' + lowing(chrAffiliation.value)
         } else {
@@ -87,29 +87,6 @@ const rsetFilters = () => {
     chrAffiliation.value = ""
     getResponseAPI("");
 }
-
-/* 
-function busqueda() {
-    document.getElementById("characters").innerHTML = "";
-
-    fetch(
-        `https://dragonball-api.com/api/characters?name=${lowing(
-            searchBar.value
-        )}`
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            document.getElementById(
-                "characters"
-            ).innerHTML = `<p id="loading">Preparando página...</p>`;
-            setTimeout(() => {
-                document.getElementById("characters").innerHTML = "";
-                const characters = getCharacters(data);
-                insertCharacters(characters);
-            }, 5000);
-        });
-}
- */
 
 function getResponseAPI(p) {
     let url = "";
