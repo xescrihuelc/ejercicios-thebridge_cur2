@@ -28,18 +28,64 @@ const insertCharacters = (p) => {
     });
 };
 
-// const filters = () => {
-// 
-// }
+const aplyFilters = () => {
+    const searchBar = document.getElementById("searchBar");
+    const chrGender = document.getElementById("characterGender");
+    const chrRace = document.getElementById("characterRace");
+    const chrAffiliation = document.getElementById("characterAffiliation");
+    let phraseFilter = "?"
+
+    // Reset filters
+    if (searchBar.value == "" && chrGender.value == "" && chrRace.value == "" && chrAffiliation.value == "") {
+        getResponseAPI("");
+        return
+    }
+
+    // IF NAME
+    if (searchBar.value !== "") {
+        phraseFilter = phraseFilter + 'name=' + lowing(searchBar.value)
+    };
+    
+    // IF GENDER
+    if (chrGender.value !== "") {
+        if (searchBar.value !== "") {
+            phraseFilter = phraseFilter + '&gender=' + lowing(chrGender.value)
+        } else {
+            phraseFilter = phraseFilter + 'gender=' + lowing(chrGender.value)
+        }
+    }
+    
+    // IF RACE
+    if (chrRace !== "") {
+        if (searchBar.value !== "" || chrGender.value !== "") {
+            phraseFilter = phraseFilter + '&race=' + lowing(chrRace.value)
+        } else {
+            phraseFilter = phraseFilter + 'race=' + lowing(chrRace.value)
+        }
+    }
+    
+    // IF AFFILIATION
+    if (chrAffiliation !== "") {
+        if (searchBar.value !== "" || chrGender.value !== "" || chrRace.value !== "") {
+            phraseFilter = phraseFilter + '&affiliation=' + lowing(chrAffiliation.value)
+        } else {
+            phraseFilter = phraseFilter + 'affiliation=' + lowing(chrAffiliation.value)
+        }
+    };
+    console.log("URL:", encodeURI(phraseFilter))
+    return phraseFilter
+}
 
 const rsetFilters = () => {
     const searchBar = document.getElementById("searchBar");
     const chrGender = document.getElementById("characterGender");
     const chrRace = document.getElementById("characterRace");
+    const chrAffiliation = document.getElementById("characterAffiliation");
     searchBar.value = ""
     chrGender.value = ""
     chrRace.value = ""
-    getResponseAPI();
+    chrAffiliation.value = ""
+    getResponseAPI("");
 }
 
 /* 
@@ -67,8 +113,7 @@ function busqueda() {
 
 function getResponseAPI(p) {
     let url = "";
-    
-    switch (url) {
+    switch (p) {
         case "":
             url = "https://dragonball-api.com/api/characters?page=1&limit=10";
             break;
@@ -81,9 +126,9 @@ function getResponseAPI(p) {
             url = nextPageLink;
             break;
 
-        // case "filter":
-            // 
-        //     break;
+        case "filter":
+            filterURL = () => aplyFilters();
+            break;
     
         default:
             console.error("Parametro no válido pasado");
@@ -140,21 +185,20 @@ function getResponseAPI(p) {
         });
 }
 
-
-
 const filterBox = document.getElementById("filterBox");
 filterBox.style.display = 'none';
-getResponseAPI();
+getResponseAPI("");
 
 
 // Variable HTML elements
 const prevBttn = document.getElementById("prevPage");
 const nxtBttn = document.getElementById("nextPage");
 const restoreFilters = document.getElementById("restoreFilters");
-// const applyFilters = document.getElementById("applyFilters");
+const applyFilters = document.getElementById("applyFilters");
 
 // Triggers
 prevBttn.addEventListener("click", () => getResponseAPI("prev"));
 nxtBttn.addEventListener("click", () => getResponseAPI("next"));
 restoreFilters.addEventListener("click", rsetFilters);
 // applyFilters.addEventListener("click", () => getResponseAPI("filter"));
+applyFilters.addEventListener("click", aplyFilters);

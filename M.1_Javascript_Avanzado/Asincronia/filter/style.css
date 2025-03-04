@@ -49,7 +49,7 @@ main  {
     padding-right: 10px;
 }
 
-#genderFilter, #raceFilter {
+#genderFilter, #raceFilter, #affiliationFilter {
     display: flex;
     flex-direction: column;
     padding-top: 15px;
