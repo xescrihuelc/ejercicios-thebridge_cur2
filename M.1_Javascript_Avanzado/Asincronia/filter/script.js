@@ -1,17 +1,19 @@
-// Busqueda
+// Variables iniciales
 let prevPageLink = "";
 let nextPageLink = "";
 
+// Funcion para que todos los carácteres pasados sean minúsculas
 function lowing(txt) {
     return String(txt).toLowerCase();
 }
 
+// Funcion para obtener info. del planeta del personaje
 const getPlanetInfo = (chrID) => {
+    // Consulta a API sobre el planeta del personaje
     fetch(`https://dragonball-api.com/api/characters/${chrID}`)
         .then((response) => response.json())
         .then((data) => {
             // Variables elementos HTML
-
             const namePlanetBox = document.getElementById("namePlanet");
             const imgPlanetBox = document.getElementById("imgPlanet");
             const descriptionPlanetBox =
@@ -22,7 +24,7 @@ const getPlanetInfo = (chrID) => {
             const planetImage = data.originPlanet.image;
             const planetDesc = data.originPlanet.description;
 
-            //
+            // Modificación elementos del <span id="planetInfoBox">
             namePlanetBox.innerText = planetName;
             imgPlanetBox.innerHTML = `<img src="${planetImage}" alt="Imagen del planeta ${planetName}" id="imgPlnt">`;
             descriptionPlanetBox.innerText = planetDesc;
@@ -33,10 +35,13 @@ const getPlanetInfo = (chrID) => {
         });
 };
 
+// Función simple para cerrar el cuadro de la info. de los planetas.
 const closePlanetInfo = () => {
     planetBox.style.display = "none";
 };
 
+// Función para almmacenar la info de los personajes en un Map() y
+// hacer más accesible los datos necesarios
 const getCharacters = (p) => {
     const array = new Map();
     p.forEach((i) => {
@@ -50,6 +55,7 @@ const getCharacters = (p) => {
     return array;
 };
 
+// Función para insertar los personajes en los
 const insertCharacters = (p) => {
     p.forEach((i) => {
         const list = document.getElementById("characters");
@@ -64,6 +70,7 @@ const insertCharacters = (p) => {
     });
 };
 
+// Función para aplicar los filtros, y tenerlos en cuenta para la consulta a la API
 const aplyFilters = () => {
     const searchBar = document.getElementById("searchBar");
     const chrGender = document.getElementById("characterGender");
@@ -122,6 +129,7 @@ const aplyFilters = () => {
     getResponseAPI("filter", encodeURI(phraseFilter));
 };
 
+// Función para reiniciar los filtros y ejecutar la consulta inicial.
 const rsetFilters = () => {
     const searchBar = document.getElementById("searchBar");
     const chrGender = document.getElementById("characterGender");
@@ -137,6 +145,7 @@ const rsetFilters = () => {
 function getResponseAPI(p, filter) {
     let url = "https://dragonball-api.com/api/characters";
 
+    // Switch de comprobación para saber para que se ejecutó
     switch (p) {
         case "":
             url = url + "?page=1&limit=10";
@@ -166,7 +175,6 @@ function getResponseAPI(p, filter) {
             // Ocultar controles y estilos
             const main = document.getElementsByTagName("main")[0];
             main.style.setProperty("justify-content", "center");
-
             filterBox.style.display = "none";
             planetBox.style.display = "none";
             prevBttn.hidden = true;
@@ -177,7 +185,8 @@ function getResponseAPI(p, filter) {
                 "characters"
             ).innerHTML = `<p id="loading">Preparando página...</p>`;
 
-            // Variables de URLs
+            // Variables de URLs a ejecutar en función
+            // del motivo de la ejecucion de la función
             if (p !== "filter") {
                 prevPageLink = data.links.previous;
                 nextPageLink = data.links.next;
@@ -186,8 +195,9 @@ function getResponseAPI(p, filter) {
             //
             setTimeout(() => {
                 document.getElementById("characters").innerHTML = "";
-                // data.items
                 let characters = "";
+                // Condicional de valor de datos recibidos en caso de
+                // ser ejecutada la función por filtro o no.
                 if (p == "filter") {
                     characters = getCharacters(data);
                 } else {
@@ -196,8 +206,8 @@ function getResponseAPI(p, filter) {
                 insertCharacters(characters);
                 filterBox.style.display = "";
 
-                // Condiciones que muestran/ocultan botones de prevPage o nextPage en
-                // función de si exísten URLs o no.
+                // Condiciones que muestran/ocultan botones de
+                // prevPage o nextPage en función de si exísten URLs o no.
                 if (p !== "filter") {
                     if (prevPageLink === "" || !data.links) {
                         prevBttn.disabled = true;
@@ -227,17 +237,18 @@ function getResponseAPI(p, filter) {
         });
 }
 
-const filterBox = document.getElementById("filterBox");
-const planetBox = document.getElementById("planetInfoBox");
-filterBox.style.display = "none";
-planetBox.style.display = "none";
-getResponseAPI("");
-
 // Variable HTML elements
 const prevBttn = document.getElementById("prevPage");
 const nxtBttn = document.getElementById("nextPage");
 const restoreFilters = document.getElementById("restoreFilters");
 const applyFilters = document.getElementById("applyFilters");
+const filterBox = document.getElementById("filterBox");
+const planetBox = document.getElementById("planetInfoBox");
+
+// Eventos de ejecución inmediata
+filterBox.style.display = "none";
+planetBox.style.display = "none";
+getResponseAPI("");
 
 // Triggers
 prevBttn.addEventListener("click", () => getResponseAPI("prev"));
