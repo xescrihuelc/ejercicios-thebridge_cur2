@@ -6,10 +6,46 @@ function lowing(txt) {
     return String(txt).toLowerCase();
 }
 
+const getPlanetInfo = (chrID) => {
+    fetch(`https://dragonball-api.com/api/characters/${chrID}`)
+        .then((response) => response.json())
+        .then((data) => {
+            // Variables elementos HTML
+
+            const namePlanetBox = document.getElementById("namePlanet");
+            const imgPlanetBox = document.getElementById("imgPlanet");
+            const descriptionPlanetBox =
+                document.getElementById("descriptionPlanet");
+
+            // Variables resultado API
+            const planetName = data.originPlanet.name;
+            const planetImage = data.originPlanet.image;
+            const planetDesc = data.originPlanet.description;
+
+            //
+            namePlanetBox.innerText = planetName;
+            imgPlanetBox.innerHTML = `<img src="${planetImage}" alt="Imagen del planeta ${planetName}" id="imgPlnt">`;
+            descriptionPlanetBox.innerText = planetDesc;
+            planetBox.style.display = "";
+        })
+        .catch((error) => {
+            console.error(`ERROR, ${error}`);
+        });
+};
+
+const closePlanetInfo = () => {
+    planetBox.style.display = "none";
+};
+
 const getCharacters = (p) => {
     const array = new Map();
     p.forEach((i) => {
-        array.set(i.id, { id: i.id, name: i.name, image: i.image, desc: i.description });
+        array.set(i.id, {
+            id: i.id,
+            name: i.name,
+            image: i.image,
+            desc: i.description,
+        });
     });
     return array;
 };
@@ -21,7 +57,7 @@ const insertCharacters = (p) => {
         character.classList.add("character");
         character.innerHTML = `
         <p class="name"><b>${i.name}</b></p>
-        <p class="image"><img src="${i.image}" alt="Figura completa de ${i.name}"></p>
+        <p class="image"><img src="${i.image}" alt="Figura completa de ${i.name}" onclick="getPlanetInfo(${i.id})"></p>
         <p class="description"><b>${i.desc}</b></p>
         `;
         list.appendChild(character);
@@ -33,61 +69,72 @@ const aplyFilters = () => {
     const chrGender = document.getElementById("characterGender");
     const chrRace = document.getElementById("characterRace");
     const chrAffiliation = document.getElementById("characterAffiliation");
-    let phraseFilter = "?"
+    let phraseFilter = "?";
 
     // Reset filters
-    if (searchBar.value == "" && chrGender.value == "" && chrRace.value == "" && chrAffiliation.value == "") {
+    if (
+        searchBar.value == "" &&
+        chrGender.value == "" &&
+        chrRace.value == "" &&
+        chrAffiliation.value == ""
+    ) {
         getResponseAPI("");
-        return
+        return;
     }
 
     // IF NAME
     if (searchBar.value !== "") {
-        phraseFilter = phraseFilter + 'name=' + lowing(searchBar.value)
-    };
-    
+        phraseFilter = phraseFilter + "name=" + lowing(searchBar.value);
+    }
+
     // IF GENDER
     if (chrGender.value !== "") {
         if (searchBar.value !== "") {
-            phraseFilter = phraseFilter + '&gender=' + lowing(chrGender.value)
+            phraseFilter = phraseFilter + "&gender=" + lowing(chrGender.value);
         } else {
-            phraseFilter = phraseFilter + 'gender=' + lowing(chrGender.value)
+            phraseFilter = phraseFilter + "gender=" + lowing(chrGender.value);
         }
     }
-    
+
     // IF RACE
     if (chrRace.value !== "") {
         if (searchBar.value !== "" || chrGender.value !== "") {
-            phraseFilter = phraseFilter + '&race=' + lowing(chrRace.value)
+            phraseFilter = phraseFilter + "&race=" + lowing(chrRace.value);
         } else {
-            phraseFilter = phraseFilter + 'race=' + lowing(chrRace.value)
+            phraseFilter = phraseFilter + "race=" + lowing(chrRace.value);
         }
     }
-    
+
     // IF AFFILIATION
     if (chrAffiliation.value !== "") {
-        if (searchBar.value !== "" || chrGender.value !== "" || chrRace.value !== "") {
-            phraseFilter = phraseFilter + '&affiliation=' + lowing(chrAffiliation.value)
+        if (
+            searchBar.value !== "" ||
+            chrGender.value !== "" ||
+            chrRace.value !== ""
+        ) {
+            phraseFilter =
+                phraseFilter + "&affiliation=" + lowing(chrAffiliation.value);
         } else {
-            phraseFilter = phraseFilter + 'affiliation=' + lowing(chrAffiliation.value)
+            phraseFilter =
+                phraseFilter + "affiliation=" + lowing(chrAffiliation.value);
         }
-    };
-    getResponseAPI("filter", encodeURI(phraseFilter))
-}
+    }
+    getResponseAPI("filter", encodeURI(phraseFilter));
+};
 
 const rsetFilters = () => {
     const searchBar = document.getElementById("searchBar");
     const chrGender = document.getElementById("characterGender");
     const chrRace = document.getElementById("characterRace");
     const chrAffiliation = document.getElementById("characterAffiliation");
-    searchBar.value = ""
-    chrGender.value = ""
-    chrRace.value = ""
-    chrAffiliation.value = ""
+    searchBar.value = "";
+    chrGender.value = "";
+    chrRace.value = "";
+    chrAffiliation.value = "";
     getResponseAPI("");
-}
+};
 
-function getResponseAPI(p,filter) {
+function getResponseAPI(p, filter) {
     let url = "https://dragonball-api.com/api/characters";
 
     switch (p) {
@@ -104,9 +151,9 @@ function getResponseAPI(p,filter) {
             break;
 
         case "filter":
-            url = url + filter            
+            url = url + filter;
             break;
-    
+
         default:
             console.error("Parametro no válido pasado");
             alert("Parametro no válido pasado");
@@ -117,10 +164,11 @@ function getResponseAPI(p,filter) {
         .then((response) => response.json())
         .then((data) => {
             // Ocultar controles y estilos
-            const main = document.getElementsByTagName('main')[0]
-            main.style.setProperty('justify-content', 'center')
-            
-            filterBox.style.display = 'none'
+            const main = document.getElementsByTagName("main")[0];
+            main.style.setProperty("justify-content", "center");
+
+            filterBox.style.display = "none";
+            planetBox.style.display = "none";
             prevBttn.hidden = true;
             nxtBttn.hidden = true;
 
@@ -135,7 +183,7 @@ function getResponseAPI(p,filter) {
                 nextPageLink = data.links.next;
             }
 
-            // 
+            //
             setTimeout(() => {
                 document.getElementById("characters").innerHTML = "";
                 // data.items
@@ -156,7 +204,7 @@ function getResponseAPI(p,filter) {
                     } else {
                         prevBttn.disabled = false;
                     }
-                    
+
                     if (nextPageLink === "" || !data.links) {
                         nxtBttn.disabled = true;
                     } else {
@@ -168,8 +216,8 @@ function getResponseAPI(p,filter) {
                 }
 
                 // Mostrar botones de control y estilos
-                filterBox.style.display = ''
-                main.style.setProperty('justify-content', 'space-between')
+                filterBox.style.display = "";
+                main.style.setProperty("justify-content", "space-between");
                 prevBttn.hidden = false;
                 nxtBttn.hidden = false;
             }, 2000);
@@ -180,9 +228,10 @@ function getResponseAPI(p,filter) {
 }
 
 const filterBox = document.getElementById("filterBox");
-filterBox.style.display = 'none';
+const planetBox = document.getElementById("planetInfoBox");
+filterBox.style.display = "none";
+planetBox.style.display = "none";
 getResponseAPI("");
-
 
 // Variable HTML elements
 const prevBttn = document.getElementById("prevPage");

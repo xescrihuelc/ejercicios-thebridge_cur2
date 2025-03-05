@@ -7,13 +7,24 @@
         <link rel="stylesheet" href="./style.css" />
         <link
             rel="shortcut icon"
-            href="https://web.dragonball-api.com/icons/favicon-16x16.png"
+            href="https://thebridge.tech/wp-content/uploads/2024/04/cropped-original-32x32.png"
             type="image/x-icon"
         />
     </head>
     <body>
         <header><b>DRAGON BALL API</b> EJERCICIO</header>
         <main>
+            <span id="planetInfoBox">
+                <input
+                    type="button"
+                    id="closePlanetBox"
+                    value="X"
+                    onclick="closePlanetInfo()"
+                />
+                <p id="namePlanet"></p>
+                <p id="imgPlanet"></p>
+                <p id="descriptionPlanet"></p>
+            </span>
             <span id="filterBox">
                 <input
                     type="search"
