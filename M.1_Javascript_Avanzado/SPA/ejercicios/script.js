@@ -2,6 +2,7 @@ const arrQuestions = new Array();
 const options = new Array();
 const correctAnswers = new Array();
 let goodAnswers = 0;
+let numQuestion = 0;
 
 function shuffleArray(array) {
     let currentIndex = array.length;
@@ -20,8 +21,8 @@ function shuffleArray(array) {
     }
 }
 
-const getQuestions = /* async */ () => {
-    fetch("https://opentdb.com/api.php?amount=10&type=multiple")
+const getQuestions = async () => {
+    await fetch("https://opentdb.com/api.php?amount=10&type=multiple")
         .then((response) => response.json())
         .then((data) => {
             // Ocultar boton para mostrar preguntas
@@ -42,10 +43,9 @@ const getQuestions = /* async */ () => {
                 // Randomizar posiciones de array 'arrOptions'
                 shuffleArray(arrOptions);
                 //
-                options.push([arrOptions]);
-                console.log(options);
+                options.push(arrOptions);
             });
-            /* showQuestions() */
+            showQuestions(numQuestion);
             questionsBox.hidden = false;
         })
         .catch((error) => {
@@ -55,11 +55,19 @@ const getQuestions = /* async */ () => {
         });
 };
 
-/* const showQuestions = (param) => {
-    console.log(param);
-    const parrafResults = document.getElementById("quizResults");
-    parrafResults.innerText = param;
-}; */
+const showQuestions = (question) => {
+    const questionPhrase = document.getElementById("question");
+    const option1 = document.getElementById("question1");
+    const option2 = document.getElementById("question2");
+    const option3 = document.getElementById("question3");
+    const option4 = document.getElementById("question4");
+    questionPhrase.innerHTML = arrQuestions[question];
+    option1.innerHTML = options[question][0];
+    option2.innerHTML = options[question][1];
+    option3.innerHTML = options[question][2];
+    option4.innerHTML = options[question][3];
+    numQuestion += 1;
+};
 
 const answer = (param) => {
     console.log(param);
