@@ -21,6 +21,14 @@ function shuffleArray(array) {
     }
 }
 
+// Función para decodificar elementos HTML (SIN ETIQUETAS)
+function decodeHTMLEntities(text) {
+    const prevText = document.createElement("div");
+    prevText.innerHTML = text;
+    const newText = prevText.innerText;
+    return newText;
+}
+
 const getQuestions = async () => {
     await fetch("https://opentdb.com/api.php?amount=10&type=multiple")
         .then((response) => response.json())
@@ -61,18 +69,27 @@ const showQuestions = (question) => {
     const option2 = document.getElementById("question2");
     const option3 = document.getElementById("question3");
     const option4 = document.getElementById("question4");
-    questionPhrase.innerHTML = arrQuestions[question];
-    option1.innerHTML = options[question][0];
-    option2.innerHTML = options[question][1];
-    option3.innerHTML = options[question][2];
-    option4.innerHTML = options[question][3];
+    questionPhrase.innerText = arrQuestions[question];
+    option1.innerText = options[question][0];
+    option1.setAttribute("value", options[question][0]);
+    option2.innerText = options[question][1];
+    option2.setAttribute("value", options[question][0]);
+    option3.innerText = options[question][2];
+    option3.setAttribute("value", options[question][0]);
+    option4.innerText = options[question][3];
+    option4.setAttribute("value", options[question][0]);
     numQuestion += 1;
 };
 
 const answer = (param) => {
-    console.log(param);
-    const parrafResults = document.getElementById("quizResults");
-    parrafResults.innerText = param;
+    // console.log(param);
+    const labels = document.querySelectorAll(".option");
+    console.log(labels[param - 1].innerText);
+    console.log(correctAnswers[param]);
+    enco;
+
+    // const parrafResults = document.getElementById("quizResults");
+    // parrafResults.innerText = param;
 };
 
 // Tag Elements
