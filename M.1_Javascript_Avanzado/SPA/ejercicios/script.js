@@ -1,6 +1,7 @@
 const arrQuestions = new Array();
 const options = new Array();
 const correctAnswers = new Array();
+let correctAnswersCounter = 0;
 let goodAnswers = 0;
 let numQuestion = 0;
 
@@ -26,6 +27,7 @@ function decodeHTMLEntities(text) {
     const prevText = document.createElement("div");
     prevText.innerHTML = text;
     const newText = prevText.innerText;
+    prevText.remove;
     return newText;
 }
 
@@ -40,13 +42,13 @@ const getQuestions = async () => {
             const questions = data.results;
             questions.forEach((quest) => {
                 const arrOptions = new Array();
-                arrQuestions.push(quest.question);
-                correctAnswers.push(quest.correct_answer);
+                arrQuestions.push(decodeHTMLEntities(quest.question));
+                correctAnswers.push(decodeHTMLEntities(quest.correct_answer));
                 arrOptions.push(
-                    quest.correct_answer,
-                    quest.incorrect_answers[0],
-                    quest.incorrect_answers[1],
-                    quest.incorrect_answers[2]
+                    decodeHTMLEntities(quest.correct_answer),
+                    decodeHTMLEntities(quest.incorrect_answers[0]),
+                    decodeHTMLEntities(quest.incorrect_answers[1]),
+                    decodeHTMLEntities(quest.incorrect_answers[2])
                 );
                 // Randomizar posiciones de array 'arrOptions'
                 shuffleArray(arrOptions);
@@ -73,23 +75,22 @@ const showQuestions = (question) => {
     option1.innerText = options[question][0];
     option1.setAttribute("value", options[question][0]);
     option2.innerText = options[question][1];
-    option2.setAttribute("value", options[question][0]);
+    option2.setAttribute("value", options[question][1]);
     option3.innerText = options[question][2];
-    option3.setAttribute("value", options[question][0]);
+    option3.setAttribute("value", options[question][2]);
     option4.innerText = options[question][3];
-    option4.setAttribute("value", options[question][0]);
+    option4.setAttribute("value", options[question][3]);
     numQuestion += 1;
 };
 
 const answer = (param) => {
-    // console.log(param);
     const labels = document.querySelectorAll(".option");
-    console.log(labels[param - 1].innerText);
-    console.log(correctAnswers[param]);
-    enco;
+    const trueAnswer = correctAnswers[correctAnswersCounter];
+    // Poner condición IF
+    console.log(labels[param].innerText);
 
-    // const parrafResults = document.getElementById("quizResults");
-    // parrafResults.innerText = param;
+    correctAnswersCounter++;
+    // numQuestion++
 };
 
 // Tag Elements
