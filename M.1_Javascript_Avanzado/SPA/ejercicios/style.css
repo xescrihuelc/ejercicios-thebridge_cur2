@@ -1,10 +1,8 @@
-#startQuizBttn {
-
-}
-#question {
-
+html {
+    text-align: center;
 }
 
-#answerBox {
-    
+#selectBox{
+    text-align: left;
+    margin-left: 10vh;
 }

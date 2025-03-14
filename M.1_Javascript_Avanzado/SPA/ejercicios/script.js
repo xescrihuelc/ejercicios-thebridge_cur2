@@ -14,3 +14,9 @@ fetch("https://opentdb.com/api.php?amount=10&type=multiple")
         console.error("ERROR OBTENCION DATOS API", error);
         alert("Error al obtener datos de la API");
     });
+
+const answer = (param) => {
+    console.log(param);
+    const parrafResults = document.getElementById("quizResults");
+    parrafResults.innerText = param;
+};
