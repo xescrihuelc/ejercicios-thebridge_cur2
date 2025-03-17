@@ -1,5 +1,3 @@
-
-
 Proyecto para la realización de un juego de preguntas y respuestas múltiples aplicando los conocimientos de JavaScript aprendidos hasta el momento. Enviar el URL del repositorio en el que lo hayáis subido.
 
 Objetivo
@@ -16,10 +14,9 @@ Requisitos
     Asincronía. Usar API de preguntas https://opentdb.com/
     APIs HTML5: Uso de Local storage y gráficas, etc...
     Sin frameworks ni librerias externas en la medida de lo posible
-    Gestión del proyecto con  Github 
+    Gestión del proyecto con Github
     Código limpio, buenas prácticas
 
 Enviar:
 
     link de GitHub
-
