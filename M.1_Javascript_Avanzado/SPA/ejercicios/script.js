@@ -5,6 +5,7 @@ let correctAnswersCounter = 0;
 let goodAnswers = 0;
 let numQuestion = 0;
 
+// Función que "aleatoriza" las respuestas de posición
 function shuffleArray(array) {
     let currentIndex = array.length;
 
@@ -83,14 +84,28 @@ const showQuestions = (question) => {
     numQuestion += 1;
 };
 
+// Función que se ejecuta al hacer clic en el
+// input radio de alguna de las respuestas
 const answer = (param) => {
     const labels = document.querySelectorAll(".option");
     const trueAnswer = correctAnswers[correctAnswersCounter];
-    // Poner condición IF
-    console.log(labels[param].innerText);
 
-    correctAnswersCounter++;
-    // numQuestion++
+    // Condición que comprueba si la respuesta seleccionada
+    // es la respuesta correcta a la pregunta.
+    if (labels[param].innerText == trueAnswer) {
+        correctAnswersCounter++;
+    }
+
+    // If que comprueba si se ha llegado a la pergunta nº 10
+    if (numQuestion == 10) {
+        showResults;
+    } else {
+        showQuestions(numQuestion);
+    }
+};
+
+const showResults = () => {
+    //
 };
 
 // Tag Elements
