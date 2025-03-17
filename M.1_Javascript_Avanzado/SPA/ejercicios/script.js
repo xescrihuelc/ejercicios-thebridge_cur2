@@ -90,6 +90,7 @@ const showResults = () => {
     questionParraf.hidden = true;
     selectAnswerBox.hidden = true;
     quizResults.hidden = false;
+    quizResults.innerText = `Has acertado ${correctAnswersCounter} de 10 preguntas`;
 };
 
 // Función que se ejecuta al hacer clic en el
@@ -105,13 +106,11 @@ const answer = (param) => {
         correctAnswersCounter++;
     }
 
-    // console.log(numQuestion, correctAnswersCounter);
     numQuestion++;
-    console.log(numQuestion);
 
     // If que comprueba si se ha llegado a la pergunta nº 10
-    if ((numQuestion = 10)) {
-        () => showResults();
+    if (numQuestion == 10) {
+        showResults();
     } else {
         showQuestions(numQuestion);
     }
