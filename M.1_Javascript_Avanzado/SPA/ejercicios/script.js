@@ -58,6 +58,7 @@ const getQuestions = async () => {
             });
             showQuestions(numQuestion);
             questionsBox.hidden = false;
+            quizResults.hidden = true;
         })
         .catch((error) => {
             console.error("ERROR OBTENCION DATOS API", error);
@@ -81,36 +82,45 @@ const showQuestions = (question) => {
     option3.setAttribute("value", options[question][2]);
     option4.innerText = options[question][3];
     option4.setAttribute("value", options[question][3]);
-    numQuestion += 1;
+};
+
+const showResults = () => {
+    const questionParraf = document.getElementById("question");
+    const selectAnswerBox = document.getElementById("selectBox");
+    questionParraf.hidden = true;
+    selectAnswerBox.hidden = true;
+    quizResults.hidden = false;
 };
 
 // Función que se ejecuta al hacer clic en el
 // input radio de alguna de las respuestas
 const answer = (param) => {
     const labels = document.querySelectorAll(".option");
-    const trueAnswer = correctAnswers[correctAnswersCounter];
+    const choosedAnswer = labels[param].innerText;
+    const trueAnswer = correctAnswers[numQuestion];
 
     // Condición que comprueba si la respuesta seleccionada
     // es la respuesta correcta a la pregunta.
-    if (labels[param].innerText == trueAnswer) {
+    if (choosedAnswer == trueAnswer) {
         correctAnswersCounter++;
     }
 
+    // console.log(numQuestion, correctAnswersCounter);
+    numQuestion++;
+    console.log(numQuestion);
+
     // If que comprueba si se ha llegado a la pergunta nº 10
-    if (numQuestion == 10) {
-        showResults;
+    if ((numQuestion = 10)) {
+        () => showResults();
     } else {
         showQuestions(numQuestion);
     }
 };
 
-const showResults = () => {
-    //
-};
-
 // Tag Elements
 const showQuestionsBttn = document.getElementById("startQuizBttn");
 const questionsBox = document.getElementById("questionsBox");
+const quizResults = document.getElementById("quizResults");
 
 // Trigger
 showQuestionsBttn.addEventListener("click", getQuestions);
