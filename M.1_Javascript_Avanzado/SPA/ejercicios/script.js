@@ -68,6 +68,13 @@ const getQuestions = async () => {
 };
 
 const showQuestions = (question) => {
+    // Desmarca los inputs puestos
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((option) => {
+        option.checked = false;
+    });
+
+    //
     const questionPhrase = document.getElementById("question");
     const option1 = document.getElementById("question1");
     const option2 = document.getElementById("question2");
