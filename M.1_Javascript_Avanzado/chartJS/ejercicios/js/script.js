@@ -38,7 +38,7 @@ const saveJoke = (phrase) => {
     const jokesArray = JSON.parse(localStorage.getItem("jokes"));
     jokesArray.push(phrase);
     localStorage.setItem("jokes", JSON.stringify(jokesArray));
-    showCanvas(document.querySelectorAll(".joke"));
+    showCanvas(JSON.parse(localStorage.getItem("jokes")));
 };
 
 // Llama una función para actualizar los onclick()
@@ -53,7 +53,7 @@ const updateJoke = () => {
         numJoke += 1;
     });
 
-    showCanvas(document.querySelectorAll(".joke"));
+    showCanvas(JSON.parse(localStorage.getItem("jokes")));
 };
 
 // Función para eliminar un chiste de
@@ -85,19 +85,24 @@ const emptyJokeList = () => {
 };
 
 const showCanvas = (jokes) => {
-    console.log(jokes);
+    let myGraph;
+    let numJoke = 0;
+    const arrayNumJoke = new Array();
+    const numCharactJoke = new Array();
 
-    // jokesList.forEach((joke) => {
-    //     console.log(joke);
-    // });
+    jokes.forEach((joke) => {
+        numJoke++;
+        arrayNumJoke.push(`Joke ${numJoke}`);
+        numCharactJoke.push(joke.length);
+    });
+    // console.log(arrayNumJoke, numCharactJoke);
 
-    /* 
-    const datos = {
-        labels: ["Enero", "Febrero"],
+    const jokesData = {
+        labels: arrayNumJoke,
         datasets: [
             {
                 label: "characters",
-                data: [65, 59, 80, 81, 56, 55, 40],
+                data: numCharactJoke,
                 backgroundColor: "rgba(75, 192, 192, 0.2)",
                 borderColor: "rgba(75, 192, 192, 1)",
                 borderWidth: 1,
@@ -105,20 +110,21 @@ const showCanvas = (jokes) => {
         ],
     };
 
-    const myGraph = new Chart(ctx, {
-        type: "bar", // Tipo de gráfico: 'bar', 'line', 'pie', etc.
-        data: datos,
+    const ctx = document.getElementById("myGraph").getContext("2d");
+
+    if (myGraph instanceof Chart) {
+        myGraph.destroy();
+    }
+
+    myGraph = new Chart(ctx, {
+        type: "bar",
+        data: jokesData,
         options: {
             scales: {
-                // y: {
-                //     beginAtZero: true,
-                // },
+                //
             },
         },
     });
-    //
-
-     */
 };
 
 // Función que carga y muestras los
@@ -132,6 +138,7 @@ const loadJoke = () => {
         jokesArray.forEach((joke) => {
             renderJoke(joke);
         });
+        showCanvas(JSON.parse(localStorage.getItem("jokes")));
     }
 };
 
@@ -139,7 +146,6 @@ const loadJoke = () => {
 const getJoke = document.getElementById("fetchJoke");
 const jokesList = document.getElementById("jokeList");
 const bttnEraseJokes = document.getElementById("eraseJokes");
-const graph = document.getElementById("myGraph").getContext("2d");
 
 // Triggers
 getJoke.addEventListener("click", obtainJoke);
