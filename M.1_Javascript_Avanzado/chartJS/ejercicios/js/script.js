@@ -1,6 +1,7 @@
 // Variable para marcar inicialmente posición
-// de Array de los chistes
+// de Array de los chistes y la variable del gráfico
 let numJoke = 0;
+let myGraph = null;
 
 // Función para obtener el chiste de la API
 const obtainJoke = () => {
@@ -85,7 +86,6 @@ const emptyJokeList = () => {
 };
 
 const showCanvas = (jokes) => {
-    let myGraph;
     let numJoke = 0;
     const arrayNumJoke = new Array();
     const numCharactJoke = new Array();
@@ -112,7 +112,7 @@ const showCanvas = (jokes) => {
 
     const ctx = document.getElementById("myGraph").getContext("2d");
 
-    if (myGraph instanceof Chart) {
+    if (myGraph) {
         myGraph.destroy();
     }
 
@@ -121,7 +121,9 @@ const showCanvas = (jokes) => {
         data: jokesData,
         options: {
             scales: {
-                //
+                y: {
+                    beginAtZero: false,
+                },
             },
         },
     });
