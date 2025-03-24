@@ -24,16 +24,23 @@ function operate() {
     //
     switch (numOperation) {
         case 1:
-            resultOperation = sum(number1, number2);
+            resultOperation = sum(Number(num1.value), Number(num2.value));
             break;
         case 2:
-            resultOperation = substract(number1, number2);
+            resultOperation = substract(Number(num1.value), Number(num2.value));
             break;
         case 3:
-            resultOperation = multiply(number1, number2);
+            resultOperation = multiply(Number(num1.value), Number(num2.value));
             break;
         case 4:
-            resultOperation = divide(number1, number2);
+            if (Number(num2.value) == 0) {
+                resultOperation = 0;
+            } else {
+                resultOperation = divide(
+                    Number(num1.value),
+                    Number(num2.value)
+                );
+            }
             break;
 
         default:
