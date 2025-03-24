@@ -56,9 +56,9 @@ function operate() {
     return resultOperation;
 }
 
-// Función para que la cargar la página
+// Función para que al cargar la página,
 // los campos de selección de operación
-// y valor de los campos de número estén vacíos.
+// y valores de los campos de número estén vacíos.
 function onload() {
     const inputs = document.querySelectorAll(".inptOption");
     inputs.forEach((option) => {
