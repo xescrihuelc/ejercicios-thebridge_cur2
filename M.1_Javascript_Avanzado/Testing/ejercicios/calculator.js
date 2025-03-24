@@ -17,8 +17,6 @@ const divide = (a, b) => {
 
 function operate() {
     // Variables de control para el switch
-    const number1 = Number(num1.value);
-    const number2 = Number(num2.value);
     let resultOperation = null;
 
     //
