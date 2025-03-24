@@ -1,5 +1,5 @@
 // Variable para marcar inicialmente posición
-// de Array de los chistes y la variable del gráfico
+// de Array de los chistes y la variable del gráfico inicializada
 let numJoke = 0;
 let myGraph = null;
 
