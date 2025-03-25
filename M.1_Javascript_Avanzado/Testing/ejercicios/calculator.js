@@ -22,6 +22,8 @@ const squareRoot = (a, b) => {
         return "Debe haber solo un número para calcular la raíz cuadrada";
     } else if (b != null) {
         return "Pon el número en el otro campo";
+    } else if (a < 0) {
+        return "NO SE PUEDE CALCULAR LA RAÍZ CUADRADA DE NÚMEROS NEGATIVOS";
     } else {
         return Math.sqrt(a);
     }

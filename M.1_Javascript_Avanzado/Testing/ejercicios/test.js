@@ -43,3 +43,10 @@ console.log(
         "squareRoot(, 4) debería decír que ponga el número en el otro campo:"
     )
 );
+console.log(
+    assertEquals(
+        squareRoot(-15),
+        "NO SE PUEDE CALCULAR LA RAÍZ CUADRADA DE NÚMEROS NEGATIVOS",
+        "squareRoot(-15) debería decír que no se pueden calcular números negativos en raíces cuadradas:"
+    )
+);
