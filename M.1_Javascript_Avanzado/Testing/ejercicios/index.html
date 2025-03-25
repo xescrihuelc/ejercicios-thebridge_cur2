@@ -8,8 +8,8 @@
     <body>
         <p>Time to do TESTING - Calculator Time</p>
         <div>
-            <input type="text" id="num1" placeholder="Introduce NUMBER" />
-            <input type="text" id="num2" placeholder="Introduce NUMBER" />
+            <input type="number" id="num1" placeholder="Introduce NUMBER" />
+            <input type="number" id="num2" placeholder="Introduce NUMBER" />
         </div>
         <div>
             <input
@@ -43,6 +43,22 @@
                 class="inptOption"
                 onclick="numOperation = 4"
             />Dividir (÷)
+            <br />
+            <input
+                type="radio"
+                name="operation"
+                id="inptElevPoten"
+                class="inptOption"
+                onclick="numOperation = 5"
+            />Elevar a la enésima potencia (^)
+            <br />
+            <input
+                type="radio"
+                name="operation"
+                id="inptElevPoten"
+                class="inptOption"
+                onclick="numOperation = 6"
+            />Obtener raíz cuadrada (x<sup>y</sup>)
         </div>
         <button id="bttnDoOperation" onclick="operate()">Operate</button>
         <p id="resultado"></p>
