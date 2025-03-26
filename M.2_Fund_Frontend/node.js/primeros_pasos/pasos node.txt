@@ -1,0 +1,15 @@
+UNA VEZ POR PROYECTO
+----------------------
+npm init -y (crear package.json)
+
+.gitignore (para que node_modules no se suba a git)
+
+hacer codigo como siempre
+
+----------------------
+
+CUANDO OS TRAIGAIS UN PROYECTO DE GIT
+----------------------
+npm i (descargar todas las dependencias y crear node_momdules)
+
+hacer codigo como siempre

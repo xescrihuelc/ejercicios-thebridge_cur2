@@ -1,0 +1,17 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Node.js es un entorno de ejecicción para JavaScript que permite ejecutar el mismo lenguaje de progrmación JavaScript en el servidor.\r Node.js permite a los desarrolladores usar JavaScript tanto para FrontEnd como para BackEnd.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chartjs": "^0.3.24",
+    "cypress": "^14.2.0"
+  }
+}
