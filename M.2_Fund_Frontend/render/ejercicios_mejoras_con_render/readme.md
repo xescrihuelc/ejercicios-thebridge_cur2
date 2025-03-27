@@ -1,5 +1,7 @@
 # ¡¡¡ Mira los archivos [despliegue_en_render.md](../despliegue_en_render.md) y [README de despliege inicial](../despliege_inicial/readme.md) para hacer este ejercicio !!!
 
+[URL Ejercicio resulto](https://ejercicio-secret-con-mejoras.onrender.com)
+
 **Ejercicio 1: Visualizar Historial de Intentos**
 
 -   **Enunciado:** Modifica la aplicación para que cada número que el usuario intente adivinar se muestre en una lista en la pantalla. Esto ayuda al jugador a recordar qué números ya ha probado.
