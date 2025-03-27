@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Quiz</title>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
         <button id="startQuizBttn">SHOW ME THE QUESTIONS</button>
@@ -12,22 +12,38 @@
             <p id="question">Question</p>
             <ul id="answerBox">
                 <div id="selectBox">
-                    <input type="radio" name="answer" onclick="selectAnswer(0)"/>
+                    <input
+                        type="radio"
+                        name="answer"
+                        onclick="selectAnswer(0)"
+                    />
                     <label class="option" id="question1"></label>
                     <br />
-                    <input type="radio" name="answer" onclick="selectAnswer(1)"/>
+                    <input
+                        type="radio"
+                        name="answer"
+                        onclick="selectAnswer(1)"
+                    />
                     <label class="option" id="question2"></label>
                     <br />
-                    <input type="radio" name="answer" onclick="selectAnswer(2)"/>
+                    <input
+                        type="radio"
+                        name="answer"
+                        onclick="selectAnswer(2)"
+                    />
                     <label class="option" id="question3"></label>
                     <br />
-                    <input type="radio" name="answer" onclick="selectAnswer(3)"/>
+                    <input
+                        type="radio"
+                        name="answer"
+                        onclick="selectAnswer(3)"
+                    />
                     <label class="option" id="question4"></label>
                 </div>
                 <br />
                 <h1 id="quizResults"></h1>
             </ul>
         </div>
-        <script src="script.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>

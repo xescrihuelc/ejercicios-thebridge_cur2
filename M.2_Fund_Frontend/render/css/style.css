@@ -5,3 +5,7 @@ html {
 #question {
     font-weight: bold;
 }
+
+#startQuizBttn {
+    background-color: yellow;
+}
