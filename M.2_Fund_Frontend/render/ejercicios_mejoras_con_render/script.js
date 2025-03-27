@@ -59,7 +59,7 @@ function handleGuess() {
 
     // Incrementar el contador de intentos
     attempts++;
-    attemptsInfo.textContent = `Intentos: ${attempts}`;
+    attemptsInfo.textContent = `Intentos: ${attempts} / 10`;
 
     const listItem = document.createElement("li"); // Crea un elemento <li>
     listItem.textContent = userGuess; // Pone el número dentro del <li>
@@ -80,6 +80,13 @@ function handleGuess() {
 
     // Limpiar el input para el siguiente intento (si no ha ganado)
     if (userGuess !== secretNumber) {
+        // Si ha alcanzado los diez intentos sin adivinatr el número secreto
+        if (attempts == 10) {
+            endGame();
+            setMessage(
+                `¡Has perdido!\nEl número correcto era: ${secretNumber}`
+            );
+        }
         guessInput.value = "";
         guessInput.focus();
     }
