@@ -9,6 +9,8 @@ const selectDifficultyBox = document.getElementById("selectDifficulty");
 const selectDifficultyOption = document.getElementById("selectOption");
 const gameDiv = document.getElementsByClassName("container")[0];
 const phraseGame = document.getElementById("phrase");
+const highScore = localStorage.getItem("highScore");
+const highScorePhrase = document.getElementById("highScore");
 
 // --- Variables del Juego ---
 let secretNumber;
@@ -20,6 +22,11 @@ const MIN_NUMBER = 1;
 
 // Función para iniciar o reiniciar el juego
 function startGame() {
+    // Comprueba si la
+    if (!highScore) {
+        localStorage.highScore = "";
+    }
+
     // Genera un número secreto entre MIN_NUMBER y MAX_NUMBER
     secretNumber = Math.floor(Math.random() * MAX_NUMBER) + MIN_NUMBER;
     attempts = 0; // Reinicia los intentos
@@ -116,6 +123,11 @@ function endGame() {
     guessInput.disabled = true; // Deshabilita el input
     guessButton.disabled = true; // Deshabilita el botón de adivinar
     playAgainButton.style.display = "inline-block"; // Muestra el botón de jugar de nuevo
+    highScorePhrase.innerText = `El record se quedó en ${highScore}`;
+    highScorePhrase.removeAttribute("hidden");
+    if (attempts < highScore || highScore == "") {
+        localStorage.highScore = attempts;
+    }
 }
 
 // Función para elejir la dificultad del juego
