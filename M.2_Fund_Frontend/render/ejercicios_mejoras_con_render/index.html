@@ -7,9 +7,18 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+        <div id="selectDifficulty">
+            <p>Selecciona el nivel de dificultad:</p>
+            <select id="selectOption">
+                <option value="" selected hidden>Selecciona dificutad</option>
+                <option value="easy">Fácil: 1-50</option>
+                <option value="medium">Medio: 1-100</option>
+                <option value="hard">Difícil: 1-200</option>
+            </select>
+        </div>
         <div class="container">
             <h1>¡Adivina el Número! 🤔<br />🎈🎈🎈🎈🎈</h1>
-            <p>
+            <p id="phrase">
                 He pensado en un número entre 1 y 100. ¿Puedes adivinar cuál es?
             </p>
 

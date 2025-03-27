@@ -5,11 +5,15 @@ const message = document.getElementById("message");
 const attemptsInfo = document.getElementById("attempts");
 const playAgainButton = document.getElementById("playAgainButton");
 const guessesList = document.getElementById("guessesList");
+const selectDifficultyBox = document.getElementById("selectDifficulty");
+const selectDifficultyOption = document.getElementById("selectOption");
+const gameDiv = document.getElementsByClassName("container")[0];
+const phraseGame = document.getElementById("phrase");
 
 // --- Variables del Juego ---
 let secretNumber;
 let attempts;
-const MAX_NUMBER = 100;
+let MAX_NUMBER = Number();
 const MIN_NUMBER = 1;
 
 // --- Funciones ---
@@ -30,8 +34,17 @@ function startGame() {
     playAgainButton.style.display = "none"; // Oculta el botón de jugar de nuevo
     guessInput.focus(); // Pone el foco en el input
     guessesList.innerHTML = "";
+    phraseGame.innerText = `He pensado en un número entre 1 y ${MAX_NUMBER}. ¿Puedes adivinar cuál es?`;
 
     console.log(`Pssst... el número secreto es ${secretNumber}`); // Ayuda para depurar
+}
+
+// Función para que cuando quede seleccionada el nivel de dificultad empieze el juego
+function selectedDifficulty() {
+    selectDifficultyBox.style.display = "none";
+    difficulty(selectDifficultyOption.value);
+    gameDiv.style.display = "";
+    startGame();
 }
 
 // Función para manejar el intento del usuario
@@ -105,6 +118,24 @@ function endGame() {
     playAgainButton.style.display = "inline-block"; // Muestra el botón de jugar de nuevo
 }
 
+// Función para elejir la dificultad del juego
+function difficulty(difficult) {
+    if (difficult == "easy") {
+        MAX_NUMBER = 50;
+    } else if (difficult == "medium") {
+        MAX_NUMBER = 100;
+    } else {
+        MAX_NUMBER = 200;
+    }
+}
+
+// Función que oculta el div del juego para
+// seleccionar primero su dificultad
+function onload() {
+    gameDiv.style.display = "none";
+    selectDifficultyOption.value = "";
+}
+
 // --- Event Listeners ---
 
 // Escuchar clics en el botón "Adivinar"
@@ -122,5 +153,8 @@ guessInput.addEventListener("keyup", function (event) {
 // Escuchar clics en el botón "Jugar de Nuevo"
 playAgainButton.addEventListener("click", startGame);
 
-// --- Iniciar el juego al cargar la página ---
-startGame();
+// Escuchar cambios en la opción de la lista.
+selectDifficultyOption.addEventListener("change", selectedDifficulty);
+
+// --- Iniciar la selección de la dificultad al cargar la página ---
+onload();
