@@ -17,12 +17,15 @@ let secretNumber;
 let attempts;
 let MAX_NUMBER = Number();
 const MIN_NUMBER = 1;
+let lastAttempt = Number();
+let distLastAttempt = Number();
+let distAttempt = Number();
 
 // --- Funciones ---
 
 // Función para iniciar o reiniciar el juego
 function startGame() {
-    // Comprueba si la
+    // Comprueba si exíste un localStorage
     if (!highScore) {
         localStorage.highScore = "";
     }
@@ -52,6 +55,16 @@ function selectedDifficulty() {
     difficulty(selectDifficultyOption.value);
     gameDiv.style.display = "";
     startGame();
+}
+
+function clue(actual, last, user) {
+    if (actual < last) {
+        setMessage("¡Más caliente! 🔥", "wrong");
+        lastAttempt = user;
+    } else {
+        setMessage("¡Más frío! 🥶", "wrong");
+        lastAttempt = user;
+    }
 }
 
 // Función para manejar el intento del usuario
@@ -84,6 +97,8 @@ function handleGuess() {
     const listItem = document.createElement("li"); // Crea un elemento <li>
     listItem.textContent = userGuess; // Pone el número dentro del <li>
     guessesList.appendChild(listItem); // Añade el <li> a la lista <ul>
+    distAttempt = Math.abs(userGuess - secretNumber);
+    distLastAttempt = Math.abs(lastAttempt - secretNumber);
 
     // Comparar el intento con el número secreto
     if (userGuess === secretNumber) {
@@ -93,9 +108,10 @@ function handleGuess() {
         );
         endGame();
     } else if (userGuess < secretNumber) {
-        setMessage("¡Demasiado bajo! Intenta un número más alto. 👇", "wrong");
+        //
+        clue(distAttempt, distLastAttempt, userGuess);
     } else {
-        setMessage("¡Demasiado alto! Intenta un número más bajo. 👆", "wrong");
+        clue(distAttempt, distLastAttempt, userGuess);
     }
 
     // Limpiar el input para el siguiente intento (si no ha ganado)
@@ -106,9 +122,10 @@ function handleGuess() {
             setMessage(
                 `¡Has perdido!\nEl número correcto era: ${secretNumber}`
             );
+        } else {
+            guessInput.value = "";
+            guessInput.focus();
         }
-        guessInput.value = "";
-        guessInput.focus();
     }
 }
 
@@ -124,10 +141,10 @@ function endGame() {
     guessButton.disabled = true; // Deshabilita el botón de adivinar
     playAgainButton.style.display = "inline-block"; // Muestra el botón de jugar de nuevo
     highScorePhrase.innerText = `El record se quedó en ${highScore}`;
-    highScorePhrase.removeAttribute("hidden");
     if (attempts < highScore || highScore == "") {
         localStorage.highScore = attempts;
     }
+    highScorePhrase.removeAttribute("hidden");
 }
 
 // Función para elejir la dificultad del juego
