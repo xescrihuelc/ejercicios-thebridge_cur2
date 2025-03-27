@@ -1,4 +1,4 @@
-# ¡¡¡ Mira el archivo [despliegue_en_render.md](./despliegue_en_render.md) para hacer este ejercicio !!!
+# ¡¡¡ Mira el archivo [despliegue_en_render.md](../despliegue_en_render.md) para hacer este ejercicio !!!
 
 # Ejercicio
 
