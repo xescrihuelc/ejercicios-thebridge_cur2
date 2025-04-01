@@ -11,13 +11,16 @@ const messageBox = document.getElementById("message-box");
 // --- Variables del Juego ---
 // Usa emojis para que sea más visual y divertido
 const cardSymbols = ["🍎", "🍌", "🍇", "🍓", "🍒", "🍑", "🍍", "🥝"];
+const cardAnimals = ["🐶", "🐱", "🐘", "🐴", "🐵", "🦍"];
+const cardFood = ["🌶", "🍔", "🍜", "🍟"];
+const currentSymbols = cardFood; // Variable para declarar símbolos para el juego
 let cards = []; // Array para guardar la información de cada carta
 let flippedCards = []; // Almacena las 2 cartas volteadas temporalmente
 let matchedPairs = 0;
 let moves = 0;
 let MAX_MOVES = 0; // Nº máximo de turnos permitidos
 let lockBoard = false; // Bloquea el tablero mientras se comparan o voltean cartas
-let totalPairs = cardSymbols.length;
+let totalPairs = currentSymbols.length;
 
 // --- Funciones ---
 
@@ -34,7 +37,7 @@ function shuffle(array) {
 // Crear el tablero de juego
 function createBoard() {
     // Duplica los símbolos para tener pares y barájalos
-    const shuffledSymbols = shuffle([...cardSymbols, ...cardSymbols]);
+    const shuffledSymbols = shuffle([...currentSymbols, ...currentSymbols]);
     totalPairsDisplay.textContent = totalPairs; // Muestra el total de pares
     gameBoard.innerHTML = ""; // Limpia el tablero anterior
 
