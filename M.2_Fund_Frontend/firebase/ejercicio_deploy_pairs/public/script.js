@@ -1,6 +1,7 @@
 // --- Elementos del DOM ---
 const gameBoard = document.getElementById("game-board");
 const movesDisplay = document.getElementById("moves");
+const maxMovesDisplay = document.getElementById("maxMoves");
 const pairsFoundDisplay = document.getElementById("pairs-found");
 const totalPairsDisplay = document.getElementById("total-pairs");
 const playAgainButton = document.getElementById("playAgainButton");
@@ -13,6 +14,7 @@ let cards = []; // Array para guardar la información de cada carta
 let flippedCards = []; // Almacena las 2 cartas volteadas temporalmente
 let matchedPairs = 0;
 let moves = 0;
+let MAX_MOVES = 0; // Nº máximo de turnos permitidos
 let lockBoard = false; // Bloquea el tablero mientras se comparan o voltean cartas
 let totalPairs = cardSymbols.length;
 
@@ -78,6 +80,14 @@ function handleCardClick() {
     }
 }
 
+// Menejar el haber perdido el juego
+function handleLoss() {
+    winMessage.style.display = "block";
+    playAgainButton.style.display = "inline-block";
+    winMessage.textContent =
+        "¡Límite de movimientos alcanzado! Inténtalo de nuevo";
+}
+
 // Comprobar si las dos cartas volteadas coinciden
 function checkForMatch() {
     const [card1, card2] = flippedCards;
@@ -86,11 +96,15 @@ function checkForMatch() {
 
     if (symbol1 === symbol2) {
         // Es un par
-
         disableCards();
     } else {
-        // No es un par
-        unflipCards();
+        if (moves == MAX_MOVES) {
+            // Si alcanza el número máximo de turnos
+            handleLoss();
+        } else {
+            // No es un par
+            unflipCards();
+        }
     }
 }
 
@@ -131,6 +145,7 @@ function incrementMoves() {
 // Comprobar si se han encontrado todos los pares
 function checkWinCondition() {
     if (matchedPairs === totalPairs) {
+        winMessage.classList.replace("failed", "correct");
         winMessage.style.display = "block";
         playAgainButton.style.display = "inline-block";
     }
@@ -140,6 +155,7 @@ function checkWinCondition() {
 function startGame() {
     // Resetear variables
     moves = 0;
+    MAX_MOVES = 20;
     matchedPairs = 0;
     flippedCards = [];
     cards = [];
@@ -147,7 +163,10 @@ function startGame() {
 
     // Resetear UI
     movesDisplay.textContent = moves;
+    maxMovesDisplay.textContent = MAX_MOVES;
     pairsFoundDisplay.textContent = matchedPairs;
+    winMessage.textContent = "¡Felicidades! ¡Has encontrado todos los pares!";
+    winMessage.classList.replace("correct", "failed");
     winMessage.style.display = "none";
     playAgainButton.style.display = "none";
 

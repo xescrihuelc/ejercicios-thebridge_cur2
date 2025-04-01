@@ -134,3 +134,7 @@ h1 {
 .message.correct {
     color: #388e3c; /* Verde */
 }
+
+.message.failed {
+    color: #590b1c; /* Verde */
+}
