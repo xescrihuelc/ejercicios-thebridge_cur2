@@ -7,6 +7,7 @@ const totalPairsDisplay = document.getElementById("total-pairs");
 const playAgainButton = document.getElementById("playAgainButton");
 const winMessage = document.getElementById("win-message");
 const messageBox = document.getElementById("message-box");
+const timeElapsed = document.getElementById("elapsed-time");
 
 // --- Variables del Juego ---
 // Usa emojis para que sea más visual y divertido
@@ -21,6 +22,7 @@ let moves = 0;
 let MAX_MOVES = 0; // Nº máximo de turnos permitidos
 let lockBoard = false; // Bloquea el tablero mientras se comparan o voltean cartas
 let totalPairs = currentSymbols.length;
+let secondsElapsed = 0;
 
 // --- Funciones ---
 
@@ -86,6 +88,7 @@ function handleCardClick() {
 
 // Menejar el haber perdido el juego
 function handleLoss() {
+    clearInterval(secondsInterval);
     winMessage.style.display = "block";
     playAgainButton.style.display = "inline-block";
     winMessage.textContent =
@@ -151,9 +154,11 @@ function incrementMoves() {
 // Comprobar si se han encontrado todos los pares
 function checkWinCondition() {
     if (matchedPairs === totalPairs) {
+        clearInterval(secondsInterval);
         winMessage.classList.replace("failed", "correct");
         winMessage.style.display = "block";
         playAgainButton.style.display = "inline-block";
+        secondsElapsed = 0;
     }
 }
 
@@ -166,6 +171,7 @@ function startGame() {
     flippedCards = [];
     cards = [];
     lockBoard = false;
+    secondsElapsed = 0;
 
     // Resetear UI
     movesDisplay.textContent = moves;
@@ -175,9 +181,16 @@ function startGame() {
     winMessage.classList.replace("correct", "failed");
     winMessage.style.display = "none";
     playAgainButton.style.display = "none";
+    timeElapsed.innerText = secondsElapsed;
 
     // Crear nuevo tablero
     createBoard();
+
+    // Empieza a contar el tiempo en segundos por pantalla
+    secondsInterval = setInterval(function () {
+        secondsElapsed++;
+        timeElapsed.innerText = secondsElapsed;
+    }, 1000);
 }
 
 // --- Event Listeners ---
