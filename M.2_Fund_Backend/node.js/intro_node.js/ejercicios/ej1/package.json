@@ -1,18 +1,14 @@
 {
-  "name": "creacion_modulos_propios",
+  "name": "ejercicio-1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "saludar": "echo hola",
     "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "logplease": "^1.2.15"
-  }
+  "type": "commonjs"
 }

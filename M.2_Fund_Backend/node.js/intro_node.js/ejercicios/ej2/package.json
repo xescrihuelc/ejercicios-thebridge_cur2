@@ -1,11 +1,10 @@
 {
-  "name": "creacion_modulos_propios",
+  "name": "ejercicio-2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "saludar": "echo hola",
     "start": "node index.js"
   },
   "keywords": [],
