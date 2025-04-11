@@ -6,7 +6,7 @@ http.createServer(function (req, res) {
     //
 
     // res.writeHead(200, { "Content-Type": "application/json" });
-    // res.end(JSON.stringify(datas.objecto));
+    // res.end(JSON.stringify({ url: req.url, missatje: "borinot" }));
 
     //
     //
@@ -26,5 +26,5 @@ http.createServer(function (req, res) {
         <p>${datas.objecto.description}</p>
     </body>
     </html>
-    `);
+    // `);
 }).listen(8080);
