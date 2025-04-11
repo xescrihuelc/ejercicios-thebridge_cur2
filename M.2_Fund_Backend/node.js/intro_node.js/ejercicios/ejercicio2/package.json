@@ -1,0 +1,22 @@
+{
+  "name": "ejercicio2",
+  "version": "1.0.0",
+  "description": "Crear un servidor HTTP en Node.js que responda con un documento HTML que contiene información específica de una página web. La información debe provenir de un objeto almacenado en otro módulo.",
+  "main": "data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec npm start",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
