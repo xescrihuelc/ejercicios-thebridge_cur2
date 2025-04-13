@@ -1,6 +1,5 @@
-M.2_Fund_Backend/node.js/*/*/node_modules/
-M.2_Fund_Backend/node.js/*/*/*/node_modules/
-M.2_Fund_Backend/node.js/*/*/*/*/node_modules/
+.vscode/
+M.2_Fund_Backend/node.js/**/node_modules/
 M.2_Fund_Backend/node.js/primeros_pasos/
 M.2_Fund_Backend/node.js/Testing/
 M.2_Fund_Backend/firebase/
