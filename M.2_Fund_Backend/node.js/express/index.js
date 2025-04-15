@@ -3,10 +3,14 @@ function capitalize(p) {
 }
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 8080;
+
+app.use(cors()); // Habilita cors para ser usado en todas las request
 
 app.get("/myName", (req, res) => {
+    console.log(req.query);
     res.send(
         "My name is: " +
             req.query.name +
@@ -22,8 +26,17 @@ app.get("/:name", (req, res) => {
         } characters`
     );
 });
+
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    const data = {
+        url: req.url,
+        method: req.method,
+        httpVersion: req.httpVersion,
+        message: "Nicolás ya comíste ya te vas?",
+    };
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(data));
+    // res.send("Hello World!");
 });
 
 app.listen(port, () => {

@@ -64,19 +64,24 @@ app.get("/:name", (req, res) => {
 
 ![Request on Path](assets/request_on_path.png)
 
--   **Como Query String** (req.params.nombreDelParametro)
+-   **Como Query String** (req.query.nombreQuery)
     Es importante tener en cuenta que cuando utilizemos `req.query` accederemos al nombre que hemos definido en la ruta:
 
 ```js
 app.get("/myName", (req, res) => {
-    res.send("My name is: " + req.query.name + " and my last name is: " + req.query.lastName);
+    res.send(
+        "My name is: " +
+            req.query.name +
+            " and my last name is: " +
+            req.query.lastName
+    );
 });
 // localhost:3000/myName/?name=pedro&lastName=Picapiedra
 ```
 
 ![Request on Query String](assets/request_on_queryString.png)
 
--   **En el Body**:
+-   **En el Body** (req.body.nombreCampoEscritoEnElBody)
 
 ```js
 
@@ -93,3 +98,38 @@ app.get("/myName", (req, res) => {
 ### `app.delete()`
 
 ## sdfd
+
+# Middleware
+
+## ¿Que es Middleware?
+
+Son esos méstodos/funciones/operaciones que se llaman ENTRE el procesamiento de la Solicitud y el envío de la Respuesta en su método de aplicación.
+
+## Instalación módulo CORS
+
+Si te has dado cuenta, es posible que anteriormente no te dejara usar la la página cliente y necesitabamos añadir la siguiente línea:
+
+```js
+res.setHeader("Access-Control-Allow-Origin", "*");
+```
+
+Esto se debe al Intercambio de Recursos de Origen Cruzado (`CORS`) del navegador, que si en nuestro servidor no indicamos que todos o ciertas IP pueden hacer una petición a otras partes o webs.
+
+Para no tener que escribir muchas líneas referentes al orígen cruzado instalaremos el módulo CORS con:
+
+```bash
+$ npm install cors
+```
+
+Una vez instalado el módulo añadimos la dependencia a nuestro .js y podemos `app.use(cors())` para ya poder hacer un CORS sin restricciones de seguridad de nuestro navegador.
+
+```js
+const express = require("express");
+//
+const cors = require("cors");
+//
+const app = express();
+const port = 8080;
+
+app.use(cors()); // Habilita cors para ser usado en todas las request
+```
