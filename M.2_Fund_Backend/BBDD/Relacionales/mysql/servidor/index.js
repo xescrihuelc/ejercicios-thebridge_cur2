@@ -18,6 +18,7 @@ const db = mysql.createConnection({
 db.connect();
 
 app.get("/cities", (req, res) => {
+    console.log(req.ip);
     const sql = "SELECT * FROM cities";
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -39,8 +40,19 @@ app.post("/cities", (req, res) => {
     });
 });
 
+app.put("/cities", (req, res) => {
+    if (!req.body.prevName || !req.body.newName) {
+        res.status(400).send("ERROR, datos incompletos");
+    }
+    const sql = `UPDATE cities SET name = '${req.body.newName}' WHERE name = '${req.body.prevName}';`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.status(202).send("City updated...");
+    });
+});
+
 app.delete("/cities/:id", (req, res) => {
-    if (!req.params.id || typeof req.params.id != Number) {
+    if (!req.params.id) {
         res.status(404).send("ERROR, datos incompletos o invalidos");
     }
     const idToDelete = Number(req.params.id);
@@ -56,10 +68,6 @@ app.delete("/cities/:id", (req, res) => {
         }
     });
 });
-
-// app.get("/", (req, res) => {
-// db.connect
-// });
 
 app.listen(port, () => {
     console.log(`App listening on port: ${port}`);

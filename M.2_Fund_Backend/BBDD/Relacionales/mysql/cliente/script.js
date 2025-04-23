@@ -1,115 +1,114 @@
-const inputAnimal = document.getElementById("inputAnimal");
+const inputCity = document.getElementById("inputCity");
 const inputStrength = document.getElementById("inputStrength");
 const btnCreate = document.getElementById("btnCreate");
-const base_url = "http://127.0.0.1:8080";
+const PORT = 808;
+const base_url = `http://127.0.0.1:${PORT}`;
 
 const alerter = (phrase, inner) => {
     alert(phrase);
-    const listAnimals = document.getElementById("listAnimals");
-    listAnimals.innerText = inner;
+    const listCities = document.getElementById("listCities");
+    listCities.innerText = inner;
 };
 
 const showUpdateWindows = () => {
-    if (confirm("¿Eealmente deseas actualizar este animal?")) {
+    if (confirm("¿Realmente deseas actualizar esta ciudad?")) {
         const newName = prompt("Indica el nuevo nombre");
-        if (isNaN(newName) == false || !newName) {
-            alert("Introduce un nombre SIN NÚMEROS");
+        if (!newName) {
             return false;
         }
-        const newStrength = prompt("Ahora el número de fuerza");
-        if (isNaN(newStrength) || !newStrength) {
-            alert(
-                "O no intruduciste nada, o pusisteste algo QUE NO ERA UN NÚMERO\nINTRODUCE UN NÚMERO PARA LA FUERZA"
-            );
+        if (isNaN(newName) == false) {
+            alert("Una ciudad NO TIENE NÚMEROS!!!!!");
             return false;
         }
-        return [newName, Number(newStrength)];
+        return newName;
     } else {
         return false;
     }
 };
 
-async function updateAnimal(idAnimal) {
+async function updateCity(idCity) {
     const wantUpdate = await showUpdateWindows();
     if (wantUpdate == false) {
         return;
     }
-    const newName = wantUpdate[0];
-    const newStrength = wantUpdate[1];
-    fetch(base_url + `/animals/${idAnimal}`, {
+    const nowName = wantUpdate;
+    const lastName = document.getElementById(
+        `${String("city" + idCity)}`
+    ).innerText;
+
+    console.log(lastName, nowName);
+
+    fetch(base_url + `/cities`, {
         headers: {
             "Content-Type": "application/json",
         },
         method: "PUT",
         body: JSON.stringify({
-            name: newName,
-            strength: Number(newStrength),
+            prevName: lastName,
+            newName: nowName,
         }),
     }).then(() => {
-        getAnimals();
+        getCities();
     });
 }
 
-function eraseAnimal(idAnimal) {
-    fetch(base_url + `/animals/${idAnimal}`, {
-        headers: {
-            "Content-Type": "application/json",
-        },
+function eraseCity(idCity) {
+    fetch(base_url + `/cities/${idCity}`, {
         method: "DELETE",
-        body: JSON.stringify({
-            id: idAnimal,
-        }),
     }).then(() => {
-        getAnimals();
+        getCities();
     });
 }
 
-function createAnimal() {
-    const animalToCreate = inputAnimal.value;
-    const strengthToCreate = inputStrength.value;
+function createCity() {
+    const cityToCreate = inputCity.value;
+    const cityCountryToCreate = inputCountry.value;
+    console.log(cityToCreate, cityCountryToCreate);
 
-    if (animalToCreate == "") {
+    if (!cityToCreate || !cityCountryToCreate) {
         alerter(
             "INTRODUCE ALGÚN VALOR, FALTAN DATOS",
-            "Introduce un valor en el campo del nombre de los animales"
+            "Introduce un valor en el campo del nombre de la ciudad y el del pais"
         );
         return;
     }
 
-    fetch(base_url + "/animals", {
+    fetch(base_url + "/cities", {
         headers: {
             "Content-Type": "application/json",
         },
         method: "POST",
         body: JSON.stringify({
-            name: animalToCreate,
-            strength: Number(strengthToCreate),
+            name: cityToCreate,
+            country: cityCountryToCreate,
         }),
     }).then(() => {
-        inputAnimal.value = "";
-        inputStrength.value = "";
-        getAnimals();
+        inputCity.value = "";
+        inputCountry.value = "";
+        getCities();
     });
 }
 
-function getAnimals() {
-    fetch(base_url + "/animals")
+function getCities() {
+    fetch(base_url + "/cities")
         .then((res) => res.json())
-        .then((animals) => {
-            console.log(animals);
-            const listAnimals = document.getElementById("listAnimals");
-            listAnimals.innerHTML = "";
-            animals.forEach((animal) => {
-                listAnimals.innerHTML += `
+        .then((cities) => {
+            console.log(cities);
+            const listCities = document.getElementById("listCities");
+            listCities.innerHTML = "";
+            cities.forEach((city) => {
+                listCities.innerHTML += `
                 <h2>
-                A: ${animal.name} - F: ${animal.strength}
-                <button type="button" onclick="eraseAnimal(${animal.id})">DELETE</button>
-                <button type="button" onclick="updateAnimal(${animal.id})">UPDATE (PUT)</button>
+                City: <span id="city${city.id}">${city.name}</span>
+                <br/>
+                Country: ${city.country}
+                <button type="button" onclick="eraseCity(${city.id})">DELETE</button>
+                <button type="button" onclick="updateCity(${city.id})">UPDATE (CITY ONLY) [PUT]</button>
                 </h2>
                 `;
             });
         });
 }
 
-btnCreate.addEventListener("click", () => createAnimal());
-getAnimals();
+btnCreate.addEventListener("click", () => createCity());
+getCities();
