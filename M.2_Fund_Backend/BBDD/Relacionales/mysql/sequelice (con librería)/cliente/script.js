@@ -1,7 +1,7 @@
 const inputCity = document.getElementById("inputCity");
 const inputStrength = document.getElementById("inputStrength");
 const btnCreate = document.getElementById("btnCreate");
-const PORT = 808;
+const PORT = 8000;
 const base_url = `http://127.0.0.1:${PORT}`;
 
 const alerter = (phrase, inner) => {

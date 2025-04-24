@@ -41,13 +41,17 @@ app.post("/cities", (req, res) => {
 });
 
 app.put("/cities", (req, res) => {
-    if (!req.body.prevName || !req.body.newName) {
+    if (!req.body.id || !req.body.newName) {
         res.status(400).send("ERROR, datos incompletos");
     }
-    const sql = `UPDATE cities SET name = '${req.body.newName}' WHERE name = '${req.body.prevName}';`;
-    db.query(sql, (err, res) => {
+    const sql = `UPDATE cities SET name = '${req.body.newName}' WHERE id = '${req.body.id}';`;
+    db.query(sql, (err, result) => {
         if (err) throw err;
-        res.status(202).send("City updated...");
+        if (result.affectedRows == 0) {
+            res.status(404).send("City not found");
+        } else {
+            res.status(200).send("City updated...");
+        }
     });
 });
 
