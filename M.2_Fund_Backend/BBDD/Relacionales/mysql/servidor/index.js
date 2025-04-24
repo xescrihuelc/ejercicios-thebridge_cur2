@@ -45,7 +45,7 @@ app.put("/cities", (req, res) => {
         res.status(400).send("ERROR, datos incompletos");
     }
     const sql = `UPDATE cities SET name = '${req.body.newName}' WHERE name = '${req.body.prevName}';`;
-    db.query(sql, (err, result) => {
+    db.query(sql, (err, res) => {
         if (err) throw err;
         res.status(202).send("City updated...");
     });
