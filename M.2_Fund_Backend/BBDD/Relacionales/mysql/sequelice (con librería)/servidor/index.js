@@ -1,55 +1,25 @@
 // DECLARE PORT AND IMPORT MODULES
-const express = require("express");
-const cors = require("cors");
-const mysql = require("mysql2");
 const PORT = 8000;
-const { Sequelize, DataTypes } = require("sequelize");
 
-// INITIAZILE EXPRESS
-const app = express();
-app.use(cors());
-app.use(express.json());
+const cors = require("cors");
+const express = require("express");
+const User = require("./models/Users");
+const usersRouter = require("./routes/users.routes");
 
 // CONFIGURATE CONNECTION TO DB WITH SEQUELIZE
-const sequelize = new Sequelize(
-    "pruebasequelize", // DB Name
-    "user", // User name
-    "password", // Password
-    {
-        host: "localhost",
-        dialect: "mysql",
-    }
-);
 
-try {
-    sequelize.authenticate().then();
-    console.log("Conectado");
-} catch (error) {
-    console.error("ERROR al conectarse", error);
-}
+const main = () => {
+    const app = express();
+    app.use(cors());
+    app.use(express.json());
 
-const User = sequelize.define(
-    "User",
-    {
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        lastName: {
-            type: DataTypes.STRING,
-        },
-    },
-    {}
-);
+    User.sync();
 
-User.sync();
+    app.use("/users", usersRouter);
 
-sequelize.close();
-//
-app.get("/", (req, res) => {
-    res.send("It works");
-});
+    app.listen(PORT, () => {
+        console.log(`App listening on port: ${PORT}`);
+    });
+};
 
-app.listen(PORT, () => {
-    console.log(`App listening on port: ${PORT}`);
-});
+main();
