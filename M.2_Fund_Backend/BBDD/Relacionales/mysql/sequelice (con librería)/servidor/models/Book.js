@@ -1,23 +1,21 @@
 const { DataTypes } = require("sequelize");
+const db = require("../db");
 
-const defineBookModel = (sequelize) => {
-    const Book = sequelize.define(
-        "Book",
-        {
-            title: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            description: {
-                type: DataTypes.STRING,
-            },
-            length: {
-                type: DataTypes.INTEGER,
-            },
+const Book = db.sequelize.define(
+    "Book",
+    {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-        {}
-    );
-    return Book;
-};
+        description: {
+            type: DataTypes.STRING,
+        },
+        length: {
+            type: DataTypes.INTEGER,
+        },
+    },
+    {}
+);
 
-module.exports = defineBookModel;
+module.exports = Book;
