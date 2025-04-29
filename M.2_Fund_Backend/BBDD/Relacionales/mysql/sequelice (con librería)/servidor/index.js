@@ -1,24 +1,26 @@
 // DECLARE PORT AND IMPORT MODULES
-const PORT = 8000;
+const port = 8000;
 
 const cors = require("cors");
 const express = require("express");
-const User = require("./models/Users");
-const usersRouter = require("./routes/users.routes");
+const db = require("./db");
+const booksRouter = require("./routes/books.routes");
 
-// CONFIGURATE CONNECTION TO DB WITH SEQUELIZE
+// CONFIGURE CONNECTION TO DB WITH SEQUALIZE
 
 const main = () => {
     const app = express();
     app.use(cors());
     app.use(express.json());
 
-    User.sync();
+    db.sequelize.sync().then(() => {
+        console.log("Re-sync db.");
+    });
 
-    app.use("/users", usersRouter);
+    app.use("/books", booksRouter);
 
-    app.listen(PORT, () => {
-        console.log(`App listening on port: ${PORT}`);
+    app.listen(port, () => {
+        console.log(`App listening on ${port}`);
     });
 };
 

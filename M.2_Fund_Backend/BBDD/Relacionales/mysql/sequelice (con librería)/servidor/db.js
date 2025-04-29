@@ -1,22 +1,13 @@
 const { Sequelize } = require("sequelize");
+const defineBookModel = require("./models/Book");
 
-const connectDB = async () => {
-    const sequelize = new Sequelize(
-        "pruebasequelize", // DB Name
-        "user", // User name
-        "password", // Password
-        {
-            host: "localhost",
-            dialect: "mysql",
-        }
-    );
-
-    return sequelize;
-};
+const sequelize = new Sequelize("pruebadb", "root", "root", {
+    host: "localhost",
+    dialect: "mysql",
+});
 
 const db = {};
-
-db.sequelize = connectDB();
-// db.sequelize.sync();
+db.books = defineBookModel(sequelize);
+db.sequelize = sequelize;
 
 module.exports = db;
