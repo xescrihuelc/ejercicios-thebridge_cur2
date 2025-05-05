@@ -1,5 +1,6 @@
 // Importando modelo
 const Book = require("../models/Book");
+const Order = require("../models/Order");
 
 const getBooks = async (req, res) => {
     const getBooks = await Book.findAll();

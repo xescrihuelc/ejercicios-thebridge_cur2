@@ -5,6 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const db = require("./db");
 const booksRouter = require("./routes/books.routes");
+const authorsRouter = require("./routes/authors.routes");
 
 // CONFIGURE CONNECTION TO DB WITH SEQUALIZE
 
@@ -18,6 +19,7 @@ const main = () => {
     });
 
     app.use("/books", booksRouter);
+    app.use("/authors", authorsRouter);
 
     app.listen(port, () => {
         console.log(`App listening on ${port}`);
