@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Montserrat"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Audiowide"
+        />
+        <title>Library Admin by Joaquim Escrihuela</title>
+    </head>
+    <body>
+        <div id="mainMenu">
+            <div id="appHeader"><h1>Library Administrator</h1></div>
+            <div id="optionsBttnsMenu">
+                <button class="menuBttns" id="registerMemberBttn">
+                    Registrar Socio
+                </button>
+                <button class="menuBttns" id="loanBookBttn">
+                    Retirar libro
+                </button>
+                <button class="menuBttns" id="returnBookBttn">
+                    Devoluci&oacute;n libro
+                </button>
+                <button class="menuBttns" id="showLoansBttn">
+                    Mostrar prestamos
+                </button>
+            </div>
+        </div>
+        <div id="optionsMenu" hidden>
+            <div id="registerMemberMenu" hidden>
+                <button class="returnToMenuBttn">HOME</button>
+                <br />
+                <div id="">
+                    <input
+                        type="text"
+                        name=""
+                        id=""
+                        placeholder="Enter new member name here:"
+                    />
+                    <button type="submit" onclick="">Register Member</button>
+                </div>
+                <!-- -->
+            </div>
+            <div id="loanBookMenu" hidden>
+                <button class="returnToMenuBttn">HOME</button>
+                <br />
+                <div>
+                    <div id="loanMember">
+                        Enter member ID:
+                        <input
+                            type="number"
+                            name=""
+                            id=""
+                            min="1"
+                            placeholder="Member ID"
+                        />
+                        <br />
+                        Enter book ID:
+                        <input
+                            type="number"
+                            name=""
+                            id=""
+                            min="1"
+                            placeholder="Book ID"
+                        />
+                    </div>
+                    <button type="submit" onclick="">Loan Book</button>
+                    <!-- -->
+                </div>
+                <div></div>
+            </div>
+            <div id="returnBookMenu" hidden>
+                <button class="returnToMenuBttn">HOME</button>
+                <br />
+                <div id="">
+                    <input
+                        type="number"
+                        name=""
+                        id=""
+                        min="1"
+                        placeholder="Enter ID book returned"
+                    />
+                    <button type="submit" onclick="">
+                        Return book (Cancel Loan)
+                    </button>
+                </div>
+                <!-- -->
+            </div>
+            <div id="showLoansMenu" hidden>
+                <button class="returnToMenuBttn">HOME</button>
+                <br />
+                <div></div>
+                <!-- -->
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
+
+<!--
+<form action="/action_page.php">
+    <label for="points">Points:</label>
+    <input type="number" id="points" name="points" step="3">
+    <input type="submit">
+</form>
+-->

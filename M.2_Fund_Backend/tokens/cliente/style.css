@@ -1,0 +1,73 @@
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+button {
+    font-family: "Montserrat", sans-serif;
+}
+
+#mainMenu {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#appHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Audiowide", sans-serif;
+    margin-top: 10dvh;
+    margin-bottom: 10dvh;
+}
+
+#optionsBttnsMenu {
+    display: flex;
+    flex-flow: row wrap;
+    /*height: 100px;*/
+    /*justify-content: space-evenly;*/
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    gap: 10px;
+}
+
+.menuBttns {
+    font-weight: bold;
+    font-size: 16px;
+    width: 180px;
+    height: 60px;
+    border-color: rgba(255, 255, 255, 0);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.returnToMenuBttn {
+    font-weight: bold;
+    font-size: 16px;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: blueviolet;
+    color: whitesmoke;
+    margin-bottom: 15px;
+}
+
+#registerMemberBttn {
+    background-color: lightcoral;
+}
+
+#loanBookBttn {
+    background-color: lightgreen;
+}
+
+#returnBookBttn {
+    background-color: yellow;
+}
+
+#showLoansBttn {
+    background-color: lightseagreen;
+}
