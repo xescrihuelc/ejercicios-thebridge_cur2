@@ -7,6 +7,7 @@ const { Op } = require("sequelize");
 
 // Functions
 const getLoans = async (req, res) => {
+    console.log(req.user);
     const memberId = req.query.memberId;
     const activeLoans = Boolean(JSON.parse(req.query.active_loans));
 

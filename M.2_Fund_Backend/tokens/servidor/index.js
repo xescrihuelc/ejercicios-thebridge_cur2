@@ -18,7 +18,7 @@ const main = () => {
     app.use(cors());
     app.use(express.json());
 
-    db.sequelize.sync({ alter: false }).then(() => {
+    db.sequelize.sync({ alter: true }).then(() => {
         console.log("Re-sync db.");
     });
 
