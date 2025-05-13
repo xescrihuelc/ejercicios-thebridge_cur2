@@ -25,7 +25,7 @@ const main = () => {
     app.use("/books", booksRouter);
     app.use("/members", membersRouter);
     app.use("/loans", authMiddleware, loansRouter);
-    app.use("/", usersRouter);
+    app.use("/users", usersRouter);
 
     app.listen(port, () => {
         console.log(`App listening on ${port}`);

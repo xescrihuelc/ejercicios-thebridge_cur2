@@ -1,14 +1,21 @@
 const Member = require("../models/Member");
+const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../config/config.json")["development"];
 
 const authMiddleware = async (req, res, next) => {
-    // EXISTE LLAVE DEL USUARIO
-    const USER_KEY = req.headers["llave"];
-    if (!USER_KEY) {
-        res.status(401).send("Missing auth header");
+    const token = req.headers.authorization;
+
+    if (!token) {
+        res.status(401).send("There is no token");
         return;
     }
+
+    const payload = jwt.verify(token, jwt_secret);
+
     // USER_KEY is ID Member
-    const user = await Member.findByPk(USER_KEY);
+    const userID = payload.userId;
+
+    const user = await Member.findByPk(userID);
     if (!user) {
         res.status(401).send("Invalid auth header");
         return;

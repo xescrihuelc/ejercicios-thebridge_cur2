@@ -2,6 +2,9 @@
 const Member = require("../models/Member");
 const bcrypt = require("bcryptjs");
 
+const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../config/config.json")["development"];
+
 const login = async (req, res) => {
     const username = req.body.username;
     const passwd = req.body.password;
@@ -26,7 +29,10 @@ const login = async (req, res) => {
         res.status(404).send("INCORRECT_USERNAME_OR_PASSWORD");
         return;
     }
-    res.status(201).send({ llave: user.id });
+
+    const token = jwt.sign({ userId: user.id }, jwt_secret);
+
+    res.status(201).send({ ID: user.id, llave: token });
 };
 
 const register = async (req, res) => {
@@ -41,8 +47,19 @@ const register = async (req, res) => {
     }
 
     // const hashedPassword = bcrypt.hashSync(passwd);
-    // res.send(passwd
+    // res.send(passwd)
     // return;
+
+    const existingUser = await Member.findOne({
+        where: {
+            user: username,
+        },
+    });
+
+    if (existingUser) {
+        res.status(400).send("No valid username");
+        return;
+    }
 
     const createdMemeber = await Member.create({
         name: memberName,
@@ -50,8 +67,7 @@ const register = async (req, res) => {
         password: passwd,
         registrationDate: new Date(),
     });
-
-    res.status(201).send({ llave: createdMemeber.id });
+    res.status(201).send({ id: createdMemeber.id });
 };
 
 const createMember = async (req, res) => {

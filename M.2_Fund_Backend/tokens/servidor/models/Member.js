@@ -21,6 +21,9 @@ const Member = db.sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        token: {
+            type: DataTypes.STRING,
+        },
     },
     {}
 );
