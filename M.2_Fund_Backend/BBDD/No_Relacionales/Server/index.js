@@ -2,6 +2,8 @@ const PORT = 8080;
 
 const express = require("express");
 const cors = require("cors");
+const { dbConnection } = require("./db");
+
 const recipesRoutes = require("./routes/recipes.routes");
 const ingredientsRoutes = require("./routes/ingredients.routes");
 const usersRoutes = require("./routes/users.routes");
@@ -14,6 +16,8 @@ const main = () => {
     app.use("/recipes", recipesRoutes);
     app.use("/ingredients", ingredientsRoutes);
     app.use("/", usersRoutes);
+
+    dbConnection();
 
     app.listen(PORT, () => {
         console.log(`App listening on port ${PORT}`);

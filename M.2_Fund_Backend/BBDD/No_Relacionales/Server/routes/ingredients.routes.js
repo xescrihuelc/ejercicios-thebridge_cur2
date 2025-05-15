@@ -1,25 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const {
+    createIngredient,
+    patchIngredient,
+    deleteIngredient,
+    getIngredient,
+} = require("../controllers/ingredient.controller");
 
-router.post("/", (req, res) => {
-    // Crear un ingrediente en mi db
-    res.send("Recipes");
-});
+router.get("/", getIngredient);
 
-router.patch("/", (req, res) => {
-    // Actualizar un ingrediente
-    res.send("Patch ingredient");
-});
+router.post("/", createIngredient);
 
-router.delete("/:id", (req, res) => {
-    // Eliminar un ingrediente
-    res.send("Delete ingredient");
-});
+router.patch("/:id", patchIngredient);
 
-router.get("/", (req, res) => {
-    // Obtener todas las recetas de un usuario
-    // {[]}
-    res.send("Get all recipes");
-});
+router.delete("/:id", deleteIngredient);
 
 module.exports = router;
