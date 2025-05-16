@@ -6,6 +6,7 @@ M.2_Fund_Backend/firebase/
 M.2_Fund_Backend/Github_Avanzado/
 M.2_Fund_Backend/render/
 M.2_Fund_Backend/scrum-trello/
+M.2_Fund_Backend/BBDD/No_Relacionales/Server/secrets.env
 #M.2_Fund_Backend/firebase/*/logs
 #M.2_Fund_Backend/firebase/*/*.log
 #M.2_Fund_Backend/firebase/*/npm-debug.log*

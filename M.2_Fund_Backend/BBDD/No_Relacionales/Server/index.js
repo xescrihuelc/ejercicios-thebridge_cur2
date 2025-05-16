@@ -3,6 +3,7 @@ const PORT = 8080;
 const express = require("express");
 const cors = require("cors");
 const { dbConnection } = require("./db");
+const { auth } = require("./middlewares/auth");
 
 const recipesRoutes = require("./routes/recipes.routes");
 const ingredientsRoutes = require("./routes/ingredients.routes");
@@ -12,9 +13,10 @@ const main = () => {
     const app = express();
     app.use(cors());
     app.use(express.json());
+    console.log("OpenAI: ", process.env.OPENAI_KEY);
 
-    app.use("/recipes", recipesRoutes);
-    app.use("/ingredients", ingredientsRoutes);
+    app.use("/recipes", auth, recipesRoutes);
+    app.use("/ingredients", auth, ingredientsRoutes);
     app.use("/", usersRoutes);
 
     dbConnection();
