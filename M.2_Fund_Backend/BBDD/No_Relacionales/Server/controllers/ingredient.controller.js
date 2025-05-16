@@ -3,7 +3,10 @@ const { Ingredient } = require("../models/ingredient.model");
 const createIngredient = async (req, res) => {
     //
     try {
-        const createdIngredient = new Ingredient(req.body);
+        const createdIngredient = new Ingredient({
+            ...req.body,
+            userId: req.user._id,
+        });
         await createdIngredient.save();
         res.send(createdIngredient);
     } catch (error) {
