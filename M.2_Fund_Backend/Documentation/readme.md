@@ -1,3 +1,3 @@
-#
+# Swagger
 
-## Swagger
+## npm -i swagger-autogen
